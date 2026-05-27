@@ -1,2 +1,1 @@
-# web-fundamentals-exercises
-Hands-on exercises and practical assignments covering core web development concepts and fundamentals.
+this was the html and css of the citywide rental system
