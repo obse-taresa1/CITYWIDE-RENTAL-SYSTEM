@@ -25,6 +25,7 @@
   --radius-sm: 8px;
   --transition: all 0.3s ease;
   --navbar-height: 72px;
+  --logo-height: 110px;
 }
 
 /* ---------- Dark Theme (CSS-only toggle) ---------- */
@@ -1407,10 +1408,11 @@ html:has(#theme-toggle:checked) .theme-toggle .icon-dark {
   align-items: center;
   padding: 1rem 0;
   position: relative;
+  justify-content: space-between; /* logo left, nav menu right */
 }
 
 .motorx-logo {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   font-weight: 900;
   color: var(--motorx-navy);
   letter-spacing: -0.5px;
@@ -1423,9 +1425,9 @@ html:has(#theme-toggle:checked) .theme-toggle .icon-dark {
 .motorx-nav-menu {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  margin-left: 2rem;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+  margin-left: 0;
 }
 
 .motorx-nav-links {
@@ -1433,7 +1435,8 @@ html:has(#theme-toggle:checked) .theme-toggle .icon-dark {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 0.25rem;
+  gap: 1rem;
+  margin-right: 0;
 }
 
 .motorx-nav-links a {
@@ -1454,6 +1457,16 @@ html:has(#theme-toggle:checked) .theme-toggle .icon-dark {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  margin-left: 0;
+}
+
+/* Ensure logo image has space and scales consistently */
+.motorx-logo img,
+.navbar-brand img {
+  height: var(--logo-height);
+  display: block;
+  max-height: 140px;
+  width: auto;
 }
 
 .nav-login {
@@ -2176,10 +2189,17 @@ html:has(#theme-toggle:checked) .theme-toggle .icon-dark {
 
 .motorx-footer .motorx-logo {
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-decoration: none;
+}
+
+/* Footer-specific logo sizing (smaller than header) */
+.motorx-footer .motorx-logo img {
+  height: var(--footer-logo-height, 64px);
+  width: auto;
+  display: block;
 }
 
 .motorx-footer p.small {
