@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — CityRent</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" class="motorx-home">
+
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-flex">
+        <div class="top-bar-contact">
+          <span><i class="bi bi-telephone-fill"></i> Hotline: (+1) 800-555-1234</span>
+          <span><i class="bi bi-envelope-fill"></i> support@cityrent.com</span>
+        </div>
+        <div class="top-bar-social">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="motorx-header">
+    <div class="container">
+      <div class="motorx-nav-flex">
+        <a class="motorx-logo" href="index.html">CITY<span>RENT</span></a>
+        <input type="checkbox" id="nav-toggle" class="nav-check" aria-label="Open menu">
+        <label for="nav-toggle" class="nav-toggler-label"><i class="bi bi-list"></i></label>
+        <nav class="motorx-nav-menu">
+          <ul class="motorx-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#featured">Items</a></li>
+            <li><a href="index.html#brands">Categories</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="contact.html" class="active">Contact Us</a></li>
+          </ul>
+          <div class="motorx-nav-actions">
+            <a href="login.html" class="nav-login">Register / Login</a>
+            <a href="list-item.html" class="btn-listing"><i class="bi bi-clock"></i> Listing Yours</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="section-space contact-page-hero">
+    <div class="container text-center">
+      <p class="eyebrow">Get in touch</p>
+      <h1 class="contact-page-title">We’re here to help</h1>
+      <p class="contact-page-lead">Questions about rentals, listings, or partnerships? Send us a message.</p>
+    </div>
+  </section>
+
+  <section class="section-space section-space-tight">
+    <div class="container contact-panel">
+      <div class="contact-copy panel-card">
+        <p class="eyebrow">Contact us</p>
+        <h2>Reach out to the CityWide Rental team.</h2>
+        <p>
+          Ask about onboarding, support, or letting us know how the platform
+          can work better for your neighborhood.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-info-card">
+            <i class="bi bi-envelope-fill contact-info-icon"></i>
+            <h3>Email</h3>
+            <p><a href="mailto:support@citywiderental.example">support@citywiderental.example</a></p>
+          </div>
+          <div class="contact-info-card">
+            <i class="bi bi-telephone-fill contact-info-icon"></i>
+            <h3>Phone</h3>
+            <p><a href="tel:+2511234567">(+251) 123-4567</a></p>
+          </div>
+          <div class="contact-info-card">
+            <i class="bi bi-clock-fill contact-info-icon"></i>
+            <h3>Hours</h3>
+            <p>Monday to Friday • 8:00 AM to 6:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card panel-card">
+        <div id="message-sent" class="contact-success-banner" tabindex="-1">
+          <i class="bi bi-check-circle-fill"></i>
+          <p><strong>Message sent!</strong> We’ll get back to you within one business day.</p>
+        </div>
+
+        <form action="contact.html#message-sent" method="get">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="contact-name" class="form-label">Name</label>
+              <input
+                id="contact-name"
+                name="contact-name"
+                type="text"
+                class="form-input"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="contact-email" class="form-label">Email</label>
+              <input
+                id="contact-email"
+                name="contact-email"
+                type="email"
+                class="form-input"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-field form-field-spaced">
+            <label for="contact-topic" class="form-label">Topic</label>
+            <select id="contact-topic" name="contact-topic" class="form-select">
+              <option>Support</option>
+              <option>Account</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-field form-field-spaced">
+            <label for="contact-message" class="form-label">Message</label>
+            <textarea
+              id="contact-message"
+              name="contact-message"
+              class="form-textarea"
+              placeholder="Tell us how we can help."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="motorx-footer">
+    <div class="container">
+      <div class="footer-flex">
+        <div>
+          <a class="motorx-logo text-white mb-3 d-inline-block" href="index.html">CITY<span>RENT</span></a>
+          <p class="small">Citywide Item Rental System — trusted rentals across your city.</p>
+        </div>
+        <div>
+          <h5>About</h5>
+          <a href="#">Our Story</a>
+          <a href="#">Careers</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <a href="contact.html">Contact page</a>
+          <a href="mailto:support@citywiderental.example">support@citywiderental.example</a>
+        </div>
+        <div>
+          <h5>Legal</h5>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+        </div>
+        <div>
+          <div class="top-bar-social">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2026 CityRent. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" id="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+</body>
+</html>
