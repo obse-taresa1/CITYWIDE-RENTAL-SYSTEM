@@ -1,199 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — CityRent</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body id="top">
-  <input type="checkbox" id="theme-toggle" class="theme-check" aria-label="Toggle dark mode">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — CityRent</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body id="top">
+    <input
+      type="checkbox"
+      id="theme-toggle"
+      class="theme-check"
+      aria-label="Toggle dark mode"
+    />
 
-  <nav class="navbar navbar-dark bg-dark navbar-custom fixed-top">
-    <div class="container-fluid px-3">
-      <a class="navbar-brand text-white" href="admin.html"><i class="bi bi-shield-lock-fill"></i> Admin Panel</a>
-      <div class="d-flex gap-2">
-        <label for="theme-toggle" class="theme-toggle">
-          <i class="bi bi-moon-fill icon-dark"></i>
-          <i class="bi bi-sun-fill icon-light"></i>
-        </label>
-        <a href="index.html" class="btn btn-sm btn-outline-light">Exit Admin</a>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container-fluid page-header pb-5" style="margin-left: 0;">
-    <h1 class="h3 mb-4">Admin Dashboard</h1>
-
-    <!-- Statistics Cards (Flexbox) -->
-    <div class="dashboard-cards mb-4">
-      <div class="card card-custom stat-card">
-        <div class="stat-icon blue"><i class="bi bi-people"></i></div>
-        <div>
-          <p class="text-muted mb-0 small">Total Users</p>
-          <h3 class="mb-0">12,458</h3>
+    <nav class="navbar navbar-dark bg-dark navbar-custom fixed-top">
+      <div class="container-fluid px-3">
+        <a class="navbar-brand text-white" href="admin.html"
+          ><i class="bi bi-shield-lock-fill"></i> Admin Panel</a
+        >
+        <div class="d-flex gap-2">
+          <label for="theme-toggle" class="theme-toggle">
+            <i class="bi bi-moon-fill icon-dark"></i>
+            <i class="bi bi-sun-fill icon-light"></i>
+          </label>
+          <a
+            href="index.html"
+            class="btn btn-sm btn-outline-light"
+            onclick="logout()"
+            >Exit Admin</a
+          >
         </div>
       </div>
-      <div class="card card-custom stat-card">
-        <div class="stat-icon green"><i class="bi bi-box-seam"></i></div>
-        <div>
-          <p class="text-muted mb-0 small">Total Listings</p>
-          <h3 class="mb-0">3,892</h3>
+    </nav>
+
+    <main class="container-fluid page-header pb-5" style="margin-left: 0">
+      <h1 class="h3 mb-4">Admin Dashboard</h1>
+
+      <!-- Statistics Cards (Flexbox) -->
+      <div class="dashboard-cards mb-4">
+        <div class="card card-custom stat-card">
+          <div class="stat-icon blue"><i class="bi bi-people"></i></div>
+          <div>
+            <p class="text-muted mb-0 small">Total Users</p>
+            <h3 class="mb-0">12,458</h3>
+          </div>
+        </div>
+        <div class="card card-custom stat-card">
+          <div class="stat-icon green"><i class="bi bi-box-seam"></i></div>
+          <div>
+            <p class="text-muted mb-0 small">Total Listings</p>
+            <h3 class="mb-0">3,892</h3>
+          </div>
+        </div>
+        <div class="card card-custom stat-card">
+          <div class="stat-icon orange"><i class="bi bi-arrow-repeat"></i></div>
+          <div>
+            <p class="text-muted mb-0 small">Active Rentals</p>
+            <h3 class="mb-0">847</h3>
+          </div>
+        </div>
+        <div class="card card-custom stat-card">
+          <div class="stat-icon purple">
+            <i class="bi bi-graph-up-arrow"></i>
+          </div>
+          <div>
+            <p class="text-muted mb-0 small">Revenue</p>
+            <h3 class="mb-0">$284K</h3>
+          </div>
         </div>
       </div>
-      <div class="card card-custom stat-card">
-        <div class="stat-icon orange"><i class="bi bi-arrow-repeat"></i></div>
-        <div>
-          <p class="text-muted mb-0 small">Active Rentals</p>
-          <h3 class="mb-0">847</h3>
+
+      <!-- Users Table -->
+      <div class="card card-custom mb-4">
+        <div class="card-header bg-white border-0 pt-4 px-4">
+          <h5 class="mb-0">Users</h5>
+        </div>
+        <div class="table-responsive table-custom">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1001</td>
+                <td>Alex Rivera</td>
+                <td>alex@email.com</td>
+                <td>Lessor</td>
+                <td><span class="badge-status badge-active">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1002</td>
+                <td>Sarah Mitchell</td>
+                <td>sarah@email.com</td>
+                <td>Lessee</td>
+                <td><span class="badge-status badge-active">Active</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1003</td>
+                <td>EventPro LLC</td>
+                <td>contact@eventpro.com</td>
+                <td>Business</td>
+                <td><span class="badge-status badge-pending">Pending</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="card card-custom stat-card">
-        <div class="stat-icon purple"><i class="bi bi-graph-up-arrow"></i></div>
-        <div>
-          <p class="text-muted mb-0 small">Revenue</p>
-          <h3 class="mb-0">$284K</h3>
+
+      <!-- Listings Table -->
+      <div class="card card-custom mb-4">
+        <div class="card-header bg-white border-0 pt-4 px-4">
+          <h5 class="mb-0">Listings</h5>
+        </div>
+        <div class="table-responsive table-custom">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Owner</th>
+                <th>Category</th>
+                <th>Price/Day</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Canon EOS DSLR Kit</td>
+                <td>David Chen</td>
+                <td>Cameras</td>
+                <td>$45</td>
+                <td><span class="badge-status badge-active">Live</span></td>
+              </tr>
+              <tr>
+                <td>Toyota RAV4 2023</td>
+                <td>AutoRent Co.</td>
+                <td>Vehicles</td>
+                <td>$65</td>
+                <td><span class="badge-status badge-active">Live</span></td>
+              </tr>
+              <tr>
+                <td>Party Tent 20x20</td>
+                <td>EventPro LLC</td>
+                <td>Event Supplies</td>
+                <td>$120</td>
+                <td><span class="badge-status badge-pending">Review</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
 
-    <!-- Users Table -->
-    <div class="card card-custom mb-4">
-      <div class="card-header bg-white border-0 pt-4 px-4">
-        <h5 class="mb-0">Users</h5>
+      <!-- Disputes Table -->
+      <div class="card card-custom mb-4">
+        <div class="card-header bg-white border-0 pt-4 px-4">
+          <h5 class="mb-0">Disputes</h5>
+        </div>
+        <div class="table-responsive table-custom">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Parties</th>
+                <th>Item</th>
+                <th>Issue</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>D-2041</td>
+                <td>Sarah M. vs Alex R.</td>
+                <td>DSLR Kit</td>
+                <td>Deposit refund</td>
+                <td><span class="badge-status badge-pending">Open</span></td>
+              </tr>
+              <tr>
+                <td>D-2038</td>
+                <td>Mike T. vs James K.</td>
+                <td>Drill Set</td>
+                <td>Damage claim</td>
+                <td>
+                  <span class="badge-status badge-dispute">Escalated</span>
+                </td>
+              </tr>
+              <tr>
+                <td>D-2035</td>
+                <td>Event Co. vs EventPro</td>
+                <td>Projector</td>
+                <td>Late return</td>
+                <td><span class="badge-status badge-active">Resolved</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="table-responsive table-custom">
-        <table class="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>#1001</td>
-              <td>Alex Rivera</td>
-              <td>alex@email.com</td>
-              <td>Lessor</td>
-              <td><span class="badge-status badge-active">Active</span></td>
-              <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-            </tr>
-            <tr>
-              <td>#1002</td>
-              <td>Sarah Mitchell</td>
-              <td>sarah@email.com</td>
-              <td>Lessee</td>
-              <td><span class="badge-status badge-active">Active</span></td>
-              <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-            </tr>
-            <tr>
-              <td>#1003</td>
-              <td>EventPro LLC</td>
-              <td>contact@eventpro.com</td>
-              <td>Business</td>
-              <td><span class="badge-status badge-pending">Pending</span></td>
-              <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <!-- Listings Table -->
-    <div class="card card-custom mb-4">
-      <div class="card-header bg-white border-0 pt-4 px-4">
-        <h5 class="mb-0">Listings</h5>
+      <!-- Role Change Requests Table -->
+      <div class="card card-custom">
+        <div class="card-header bg-white border-0 pt-4 px-4">
+          <h5 class="mb-0">Role Change Requests</h5>
+        </div>
+        <div class="table-responsive table-custom">
+          <table class="table table-hover mb-0" id="role-change-requests-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>User Name</th>
+                <th>Current Role</th>
+                <th>Requested Role</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="role-change-requests-body">
+              <tr>
+                <td>R-1001</td>
+                <td>John Smith</td>
+                <td>Lessor</td>
+                <td>Lessee</td>
+                <td>Jun 1, 2026</td>
+                <td><span class="badge-status badge-pending">Pending</span></td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success me-1"
+                    onclick="approveRoleChange('R-1001')"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    onclick="rejectRoleChange('R-1001')"
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>R-1002</td>
+                <td>Sarah Johnson</td>
+                <td>Lessee</td>
+                <td>Both</td>
+                <td>Jun 2, 2026</td>
+                <td><span class="badge-status badge-pending">Pending</span></td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success me-1"
+                    onclick="approveRoleChange('R-1002')"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    onclick="rejectRoleChange('R-1002')"
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>R-1003</td>
+                <td>Mike Davis</td>
+                <td>Both</td>
+                <td>Lessor</td>
+                <td>Jun 3, 2026</td>
+                <td><span class="badge-status badge-active">Approved</span></td>
+                <td>
+                  <button class="btn btn-sm btn-outline-secondary" disabled>
+                    Completed
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="table-responsive table-custom">
-        <table class="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Owner</th>
-              <th>Category</th>
-              <th>Price/Day</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Canon EOS DSLR Kit</td>
-              <td>David Chen</td>
-              <td>Cameras</td>
-              <td>$45</td>
-              <td><span class="badge-status badge-active">Live</span></td>
-            </tr>
-            <tr>
-              <td>Toyota RAV4 2023</td>
-              <td>AutoRent Co.</td>
-              <td>Vehicles</td>
-              <td>$65</td>
-              <td><span class="badge-status badge-active">Live</span></td>
-            </tr>
-            <tr>
-              <td>Party Tent 20x20</td>
-              <td>EventPro LLC</td>
-              <td>Event Supplies</td>
-              <td>$120</td>
-              <td><span class="badge-status badge-pending">Review</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </main>
 
-    <!-- Disputes Table -->
-    <div class="card card-custom">
-      <div class="card-header bg-white border-0 pt-4 px-4">
-        <h5 class="mb-0">Disputes</h5>
-      </div>
-      <div class="table-responsive table-custom">
-        <table class="table table-hover mb-0">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Parties</th>
-              <th>Item</th>
-              <th>Issue</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>D-2041</td>
-              <td>Sarah M. vs Alex R.</td>
-              <td>DSLR Kit</td>
-              <td>Deposit refund</td>
-              <td><span class="badge-status badge-pending">Open</span></td>
-            </tr>
-            <tr>
-              <td>D-2038</td>
-              <td>Mike T. vs James K.</td>
-              <td>Drill Set</td>
-              <td>Damage claim</td>
-              <td><span class="badge-status badge-dispute">Escalated</span></td>
-            </tr>
-            <tr>
-              <td>D-2035</td>
-              <td>Event Co. vs EventPro</td>
-              <td>Projector</td>
-              <td>Late return</td>
-              <td><span class="badge-status badge-active">Resolved</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
+    <a href="#top" id="back-to-top" aria-label="Back to top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
 
-  <a href="#top" id="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
-</body>
+    <script src="js/admin-dashboard.js"></script>
+  </body>
 </html>

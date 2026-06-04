@@ -90,10 +90,12 @@
             <input type="password" class="form-control" id="confirm" required />
           </div>
           <div class="mb-4">
-            <label class="form-label d-block mb-2">I want to register as</label>
+            <label class="form-label d-block mb-2"
+              >I want to register as <span class="text-danger">*</span></label
+            >
             <div class="role-selector">
               <label class="role-option">
-                <input type="radio" name="role" value="lessor" checked />
+                <input type="radio" name="role" value="lessor" />
                 <i class="bi bi-shop d-block fs-4 mb-1"></i>
                 <strong>Lessor</strong>
                 <small class="d-block text-muted">List items</small>
@@ -104,6 +106,19 @@
                 <strong>Lessee</strong>
                 <small class="d-block text-muted">Rent items</small>
               </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="both" />
+                <i class="bi bi-people d-block fs-4 mb-1"></i>
+                <strong>Both</strong>
+                <small class="d-block text-muted">List & rent</small>
+              </label>
+            </div>
+            <div
+              id="role-error"
+              class="text-danger small mt-2"
+              style="display: none"
+            >
+              Please select a role to continue.
             </div>
           </div>
           <button type="submit" class="btn btn-primary-custom w-100">
@@ -116,5 +131,7 @@
         </p>
       </div>
     </main>
+
+    <script src="js/register.js"></script>
   </body>
 </html>
