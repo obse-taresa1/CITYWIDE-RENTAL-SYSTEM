@@ -1,4 +1,25 @@
-// Logout function
+// Create default Super Admin if it doesn't exist
+function initializeSuperAdmin() {
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  const superAdminExists = users.some((user) => user.role === "superadmin");
+
+  if (!superAdminExists) {
+    users.push({
+      id: 1,
+      fullname: "Super Admin",
+      email: "superadmin@citywide.com",
+      password: "SuperAdmin123",
+      role: "superadmin",
+      createdAt: new Date().toISOString(),
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    console.log("Default Super Admin created");
+  }
+}
+
+initializeSuperAdmin(); // Logout function
 function logout() {
   localStorage.removeItem("currentUser");
   window.location.href = "index.html";

@@ -18,7 +18,7 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body id="top" class="motorx-home">
+  <body id="top" class="motorx-home" data-public-shell="true">
     <div class="top-bar">
       <div class="container">
         <div class="top-bar-flex">
@@ -123,7 +123,7 @@
             </p>
           </div>
 
-          <form action="contact.html#message-sent" method="get">
+          <form id="contact-form" action="contact.html#message-sent" method="get">
             <div class="form-grid">
               <div class="form-field">
                 <label for="contact-name" class="form-label">Name</label>
@@ -150,7 +150,7 @@
             </div>
 
             <div class="form-field form-field-spaced">
-              <label for="contact-topic" class="form-label">Topic</label>
+              <label for="contact-topic" class="form-label">Subject</label>
               <select
                 id="contact-topic"
                 name="contact-topic"
@@ -232,5 +232,7 @@
     <a href="#top" id="back-to-top" aria-label="Back to top"
       ><i class="bi bi-arrow-up"></i
     ></a>
+    <script src="js/contact.js"></script>
+    <script src="js/shared-ui.js"></script>
   </body>
 </html>

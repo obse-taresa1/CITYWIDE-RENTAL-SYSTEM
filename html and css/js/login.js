@@ -1,4 +1,47 @@
 // Email validation function
+const DEFAULT_SUPER_ADMIN = {
+  id: "SA-DEFAULT",
+  fullname: "Super Admin",
+  email: "superadmin@citywide.com",
+  phone: "",
+  password: "SuperAdmin123",
+  role: "superadmin",
+  createdAt: "2026-01-01T00:00:00.000Z",
+  systemAccount: true,
+};
+
+function seedDefaultSuperAdmin() {
+  let users = [];
+  try {
+    users = JSON.parse(localStorage.getItem("users") || "[]");
+  } catch (error) {
+    users = [];
+  }
+
+  const hasDefaultSuperAdmin = users.some(
+    (user) =>
+      user.email &&
+      user.email.toLowerCase() === DEFAULT_SUPER_ADMIN.email.toLowerCase(),
+  );
+
+  const hasAnySuperAdmin = users.some((user) => user.role === "superadmin");
+  if (!hasDefaultSuperAdmin && !hasAnySuperAdmin) {
+    users.push(DEFAULT_SUPER_ADMIN);
+    localStorage.setItem("users", JSON.stringify(users));
+  } else {
+    const dedupedUsers = users.filter((user, index, allUsers) => {
+      if (user.role !== "superadmin") return true;
+      return (
+        allUsers.findIndex((candidate) => candidate.role === "superadmin") ===
+        index
+      );
+    });
+    localStorage.setItem("users", JSON.stringify(dedupedUsers));
+  }
+}
+
+seedDefaultSuperAdmin();
+
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

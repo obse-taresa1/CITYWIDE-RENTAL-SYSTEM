@@ -18,7 +18,7 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body id="top" class="motorx-home">
+  <body id="top" class="motorx-home" data-public-shell="true">
     <!-- Top Bar -->
     <div class="top-bar">
       <div class="container">
@@ -76,16 +76,76 @@
     </header>
 
     <!-- Hero -->
-    <section class="motorx-hero">
-      <div class="motorx-hero-bg"></div>
+    <section class="motorx-hero" data-hero-slider>
+      <div class="motorx-hero-bg" aria-hidden="true">
+        <div
+          class="hero-slide is-active"
+          style="background-image: url('images/Toyota RAV4.jpg')"
+          data-title="Rent Cars & Vehicles Near You"
+          data-subtitle="Browse trusted vehicle rentals from local owners."
+          data-card-title="Toyota RAV4 2023"
+          data-card-price="$65"
+          data-card-location="Downtown"
+          data-card-image="images/Toyota RAV4.jpg"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/pc.png')"
+          data-title="Rent Electronics For Any Occasion"
+          data-subtitle="Find laptops, speakers, projectors, gaming devices, and more."
+          data-card-title="Gaming Laptop RTX 4070"
+          data-card-price="$35"
+          data-card-location="Midtown"
+          data-card-image="images/pc.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/dewalt.png')"
+          data-title="Professional Tools On Demand"
+          data-subtitle="Rent tools and equipment without the cost of ownership."
+          data-card-title="DeWalt Power Drill Set"
+          data-card-price="$18"
+          data-card-location="Westside"
+          data-card-image="images/dewalt.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/canon.png')"
+          data-title="Camera Rentals For Every Shoot"
+          data-subtitle="Book cameras, lenses, and kits for events, content, and creative work."
+          data-card-title="Canon EOS DSLR Kit"
+          data-card-price="$45"
+          data-card-location="Downtown"
+          data-card-image="images/canon.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/furnsofa.png')"
+          data-title="Furniture Rentals Made Easy"
+          data-subtitle="Affordable furniture rentals for homes and events."
+          data-card-title="Modern Sectional Sofa"
+          data-card-price="$55"
+          data-card-location="Uptown"
+          data-card-image="images/furnsofa.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/sportbick.png')"
+          data-title="Sports Gear Ready When You Are"
+          data-subtitle="Rent bikes, golf sets, kayaks, climbing gear, and outdoor equipment."
+          data-card-title="Mountain Bike Pro"
+          data-card-price="$15"
+          data-card-location="Park"
+          data-card-image="images/sportbick.png"
+        ></div>
+      </div>
       <div class="container motorx-hero-inner">
         <div class="hero-layout">
           <div class="hero-text">
             <span class="hero-tag">TRUSTED DEALER, RENTAL</span>
-            <h1>Premium Item Collection..</h1>
-            <p>
-              Connect with local owners and businesses to rent tools,
-              electronics, vehicles, event equipment, and more — citywide.
+            <h1 data-hero-title>Rent Cars & Vehicles Near You</h1>
+            <p data-hero-subtitle>
+              Browse trusted vehicle rentals from local owners.
             </p>
             <div class="hero-cta">
               <a href="items.html" class="btn-hero-primary">Go To Listing</a>
@@ -103,16 +163,42 @@
               <span class="discount-off">OFF</span>
             </div>
             <div class="hero-float-card">
-              <img src="images/Toyota RAV4.jpg" alt="Toyota RAV4" />
+              <img
+                src="images/Toyota RAV4.jpg"
+                alt="Featured rental item"
+                data-hero-card-img
+              />
               <div>
-                <strong>Luxury Toyota RAV4</strong>
-                <span class="float-price">$65 <small>/ day</small></span>
+                <strong data-hero-card-title>Toyota RAV4 2023</strong>
+                <span class="float-price"
+                  ><span data-hero-card-price>$65</span> <small>/ day</small></span
+                >
                 <span class="float-loc"
-                  ><i class="bi bi-geo-alt"></i> Downtown</span
+                  ><i class="bi bi-geo-alt"></i>
+                  <span data-hero-card-location>Downtown</span></span
                 >
               </div>
             </div>
           </div>
+        </div>
+        <div class="hero-slider-controls" aria-label="Hero slider controls">
+          <button
+            type="button"
+            class="hero-slider-arrow"
+            data-hero-prev
+            aria-label="Previous hero slide"
+          >
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <div class="hero-slider-dots" data-hero-dots aria-label="Hero slides"></div>
+          <button
+            type="button"
+            class="hero-slider-arrow"
+            data-hero-next
+            aria-label="Next hero slide"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
 
@@ -133,29 +219,37 @@
             <label for="tab-used">Used Items</label>
             <label for="tab-new">New Items</label>
           </div>
-          <form class="search-form-flex" action="#featured" method="get">
+          <form class="search-form-flex home-search-form" data-home-search method="get">
             <div class="search-field">
-              <label>Category</label>
-              <select class="form-select">
-                <option>All Categories</option>
-                <option>Electronics</option>
-                <option>Tools</option>
-                <option>Vehicles</option>
-                <option>Cameras</option>
+              <label for="home-search-category">Category</label>
+              <select class="form-select" id="home-search-category" name="category">
+                <option value="all">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="tools">Tools</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="cameras">Cameras</option>
+                <option value="sports">Sports</option>
+                <option value="furniture">Furniture</option>
               </select>
             </div>
             <div class="search-field">
-              <label>Item Type</label>
-              <select class="form-select">
-                <option>Any Type</option>
-                <option>Portable</option>
-                <option>Heavy Duty</option>
-                <option>Vehicle</option>
+              <label for="home-search-type">Item Type</label>
+              <select class="form-select" id="home-search-type" name="type">
+                <option value="any">Any Type</option>
+                <option value="portable">Portable</option>
+                <option value="vehicle">Vehicle</option>
+                <option value="tools">Tools</option>
+                <option value="electronics">Electronics</option>
+                <option value="camera">Camera</option>
+                <option value="furniture">Furniture</option>
+                <option value="sports">Sports</option>
               </select>
             </div>
             <div class="search-field search-price">
-              <label>Price Range</label>
+              <label for="home-search-price">Max Price</label>
               <input
+                id="home-search-price"
+                name="maxPrice"
                 type="range"
                 class="form-range"
                 min="10"
@@ -166,58 +260,10 @@
               <span class="price-val">$120 / day</span>
             </div>
             <button type="submit" class="btn-search-main">
-              <span class="search-count">2351 Items</span>
+              <span class="search-count">Search Rentals</span>
               <i class="bi bi-search"></i>
             </button>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Browse By Brands / Categories -->
-    <section id="brands" class="section-brands py-5">
-      <div class="container">
-        <div class="section-head-center">
-          <span class="section-label">FIND YOUR ITEM BY CATEGORY</span>
-          <h2>Browse By Categories</h2>
-        </div>
-        <div class="row g-4 justify-content-center brand-row">
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-electronics.html" class="brand-card">
-              <span class="brand-logo">E</span>
-              <span>Electronics</span>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-tools.html" class="brand-card">
-              <span class="brand-logo">T</span>
-              <span>Tools</span>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-cameras.html" class="brand-card">
-              <span class="brand-logo">C</span>
-              <span>Cameras</span>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-vehicles.html" class="brand-card">
-              <span class="brand-logo">V</span>
-              <span>Vehicles</span>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-sports.html" class="brand-card">
-              <span class="brand-logo">S</span>
-              <span>Sports</span>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-2">
-            <a href="category-furniture.html" class="brand-card">
-              <span class="brand-logo">F</span>
-              <span>Furniture</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -517,5 +563,6 @@
     <a href="#top" id="back-to-top" aria-label="Back to top"
       ><i class="bi bi-arrow-up"></i
     ></a>
+    <script src="js/shared-ui.js"></script>
   </body>
 </html>
