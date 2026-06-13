@@ -1,5 +1,5 @@
 ﻿(() => {
-  const API_KEY = "AIzaSyAhn4sWBnTRvZhXRwFllZ6RRkJ1Nh_PakY";
+  const API_KEY = "AIzaSyBJbIlFDnvTlGABr2cLiorz22voB6UYJRo";
   const GEMINI_MODEL = "gemini-3.5-flash";
 
   const API_URL =
@@ -56,53 +56,66 @@ Rules:
     ],
     lessee: [
       ["lessee-dashboard.html", "bi-speedometer2", "Overview"],
-      ["booking.html", "bi-calendar-check", "Bookings"],
+      ["items.html", "bi-grid", "Browse Listings"],
+      ["items.html", "bi-search", "Search Listings"],
+      ["booking.html", "bi-calendar-check", "My Bookings"],
+      ["booking.html#history", "bi-clock-history", "Booking History"],
+      ["items.html#favorites", "bi-heart", "Favorites"],
       ["messages.html", "bi-chat-dots", "Messages"],
+      ["notifications.html", "bi-bell", "Notifications"],
       ["profile.html", "bi-person-circle", "Profile"],
-      ["items.html", "bi-search", "Browse Items"],
     ],
     lessor: [
       ["lessor-dashboard.html", "bi-speedometer2", "Overview"],
-      ["list-item.html", "bi-plus-circle", "List Item"],
-      ["booking.html", "bi-calendar2-week", "Bookings"],
+      ["dashboard.html", "bi-list-check", "My Listings"],
+      ["list-item.html", "bi-plus-circle", "Add Listing"],
+      ["dashboard.html#edit-listings", "bi-pencil-square", "Edit Listings"],
+      ["dashboard.html#delete-listings", "bi-trash", "Delete Listings"],
+      ["booking.html#requests", "bi-calendar2-week", "Booking Requests"],
+      ["profile.html#earnings", "bi-cash-coin", "Earnings"],
+      ["dashboard.html#statistics", "bi-graph-up-arrow", "Statistics"],
       ["messages.html", "bi-chat-dots", "Messages"],
+      ["notifications.html", "bi-bell", "Notifications"],
       ["profile.html", "bi-person-circle", "Profile"],
     ],
     both: [
       ["both-dashboard.html", "bi-grid-1x2", "Overview"],
       ["items.html", "bi-search", "Find Rentals"],
+      ["booking.html", "bi-calendar-check", "My Bookings"],
+      ["items.html#favorites", "bi-heart", "Favorites"],
       ["list-item.html", "bi-plus-circle", "List Item"],
-      ["booking.html", "bi-calendar-check", "Bookings"],
+      ["dashboard.html", "bi-list-check", "My Listings"],
+      ["booking.html#requests", "bi-calendar2-week", "Booking Requests"],
+      ["profile.html#earnings", "bi-cash-coin", "Earnings"],
       ["messages.html", "bi-chat-dots", "Messages"],
+      ["notifications.html", "bi-bell", "Notifications"],
       ["profile.html", "bi-person-circle", "Profile"],
     ],
     admin: [
-      ["admin.html", "bi-speedometer2", "Overview"],
-      ["admin.html#users", "bi-people", "User Management"],
-      ["admin.html#listings", "bi-box-seam", "Listing Management"],
-      ["admin.html#disputes", "bi-exclamation-triangle", "Disputes"],
-      ["admin.html#reports", "bi-bar-chart", "Reports"],
+      ["dashboard.html", "bi-speedometer2", "Dashboard"],
+      ["users.html", "bi-people", "Users"],
+      ["listings.html", "bi-box-seam", "Listings"],
+      ["messages.html", "bi-envelope", "Messages"],
+      ["reports.html", "bi-flag", "Reports"],
+      ["statistics.html", "bi-bar-chart", "Statistics"],
+      ["settings.html", "bi-gear", "Settings"],
     ],
     "super-admin": [
-      ["super-admin-dashboard.html", "bi-shield-check", "Overview"],
-      [
-        "super-admin-dashboard.html#admins",
-        "bi-person-badge",
-        "Admin Management",
-      ],
-      ["super-admin-dashboard.html#settings", "bi-gear", "System Settings"],
-      [
-        "super-admin-dashboard.html#analytics",
-        "bi-graph-up-arrow",
-        "Analytics",
-      ],
-      ["super-admin-dashboard.html#logs", "bi-journal-text", "System Logs"],
+      ["super-dashboard.html", "bi-command", "Control Center"],
+      ["admin-management.html", "bi-person-badge", "Admin Management"],
+      ["user-management.html", "bi-people", "User Management"],
+      ["listing-management.html", "bi-box-seam", "Listing Management"],
+      ["contact-messages.html", "bi-envelope", "Contact Messages"],
+      ["role-requests.html", "bi-arrow-repeat", "Role Requests"],
+      ["analytics.html", "bi-graph-up-arrow", "Analytics"],
+      ["activity-logs.html", "bi-journal-text", "Activity Logs"],
+      ["system-settings.html", "bi-sliders", "System Settings"],
     ],
   };
 
   const roleLabels = {
     user: "Dashboard",
-    lessee: "Lessee Dashboard",
+    lessee: "Renter Dashboard",
     lessor: "Lessor Dashboard",
     both: "CityRent Dashboard",
     admin: "Admin Dashboard",
@@ -133,6 +146,48 @@ Rules:
       localStorage.removeItem("currentUser");
       return null;
     }
+  }
+
+  function currentRole() {
+    return (currentUser()?.role || "").toLowerCase();
+  }
+
+  function redirectToRoleDashboard(role) {
+    const routes = {
+      lessee: "lessee-dashboard.html",
+      lessor: "lessor-dashboard.html",
+      both: "both-dashboard.html",
+      admin: "admin.html",
+      supervisor: "admin.html",
+      superadmin: "super-admin-dashboard.html",
+    };
+    window.location.href = routes[role] || "login.html";
+  }
+
+  function enforceRoleAccess() {
+    const page = currentPage();
+    const role = currentRole();
+    if (!role) return;
+
+    const listingManagementPages = ["list-item.html", "dashboard.html"];
+    if (role === "lessee" && listingManagementPages.includes(page)) {
+      redirectToRoleDashboard(role);
+      return;
+    }
+
+    if (role === "lessor" && page === "booking.html" && window.location.hash !== "#requests") {
+      window.location.replace("booking.html#requests");
+    }
+  }
+
+  function shellRole(requestedRole) {
+    if (requestedRole !== "user") return requestedRole;
+    const role = currentRole();
+    if (["lessee", "lessor", "both", "admin", "supervisor"].includes(role)) {
+      return role === "supervisor" ? "admin" : role;
+    }
+    if (role === "superadmin") return "super-admin";
+    return "user";
   }
 
   function activePublicKey(page) {
@@ -427,7 +482,6 @@ Rules:
 
       const formData = new FormData(form);
       const category = (formData.get("category") || "all").toString();
-      const type = (formData.get("type") || "any").toString();
       const maxPrice = (formData.get("maxPrice") || "").toString();
       const selectedTab =
         document.querySelector('input[name="item-tab"]:checked')?.id || "tab-all";
@@ -441,7 +495,6 @@ Rules:
       const target = categoryRoutes[category] || categoryRoutes.all;
       const params = new URLSearchParams();
       params.set("category", category);
-      if (type !== "any") params.set("type", type);
       if (maxPrice) params.set("maxPrice", maxPrice);
       if (status !== "all") params.set("status", status);
 
@@ -451,7 +504,7 @@ Rules:
 
   function installListingSearchFilters() {
     const params = new URLSearchParams(window.location.search);
-    const hasSearchFilters = ["category", "type", "maxPrice", "status"].some((key) =>
+    const hasSearchFilters = ["category", "maxPrice", "status"].some((key) =>
       params.has(key),
     );
     if (!hasSearchFilters) return;
@@ -467,7 +520,6 @@ Rules:
 
     const pageCategory = categoryFromPage();
     const selectedCategory = params.get("category") || pageCategory || "all";
-    const selectedType = params.get("type") || "any";
     const selectedStatus = params.get("status") || "all";
     const maxPrice = Number(params.get("maxPrice") || "0");
 
@@ -481,13 +533,11 @@ Rules:
 
       const categoryMatches =
         selectedCategory === "all" || category === selectedCategory;
-      const typeMatches =
-        selectedType === "any" || cardText.includes(normalize(selectedType));
       const priceMatches = !maxPrice || price <= maxPrice;
       const statusMatches =
         selectedStatus === "all" || status === selectedStatus;
       const shouldShow =
-        categoryMatches && typeMatches && priceMatches && statusMatches;
+        categoryMatches && priceMatches && statusMatches;
 
       cardWrapper.hidden = !shouldShow;
       if (shouldShow) visibleCount += 1;
@@ -498,7 +548,6 @@ Rules:
       listingGrid,
       visibleCount,
       selectedCategory,
-      selectedType,
       selectedStatus,
       maxPrice,
     });
@@ -543,14 +592,12 @@ Rules:
     listingGrid,
     visibleCount,
     selectedCategory,
-    selectedType,
     selectedStatus,
     maxPrice,
   }) {
     const categoryLabel =
       selectedCategory === "all" ? "all categories" : selectedCategory.replace("-", " ");
     const filters = [
-      selectedType !== "any" ? `${selectedType} type` : "",
       selectedStatus !== "all" ? `${selectedStatus} items` : "",
       maxPrice ? `up to $${maxPrice}/day` : "",
     ].filter(Boolean);
@@ -574,10 +621,23 @@ Rules:
       emptyState = document.createElement("div");
       emptyState.className = "no-results-message";
       emptyState.dataset.noResults = "true";
-      emptyState.innerHTML = `<i class="bi bi-search"></i><h3>No matching rentals found</h3><p>Try a broader item type, a higher price range, or another category.</p><a href="index.html" class="btn-accent-custom">Back to Search</a>`;
+      emptyState.innerHTML = `<i class="bi bi-search"></i><h3>No matching rentals found</h3><p>Try a higher price range or another category.</p><a href="index.html" class="btn-accent-custom">Back to Search</a>`;
       listingGrid.parentNode.insertBefore(emptyState, listingGrid.nextSibling);
     }
     emptyState.hidden = visibleCount !== 0;
+  }
+
+  function installItemDetailLinks() {
+    if (!window.CityRentItemService) return;
+
+    document.querySelectorAll(".motorx-card").forEach((card) => {
+      const title = card.querySelector(".motorx-card-body h3")?.textContent || "";
+      const item = window.CityRentItemService.getItemByTitle(title);
+      const link = card.querySelector('a.view-details[href*="item-details.html"]');
+      if (item && link) {
+        link.href = `item-details.html?id=${encodeURIComponent(item.id)}`;
+      }
+    });
   }
 
   function normalize(value) {
@@ -720,6 +780,9 @@ Rules:
       resizeInput();
 
       if (API_KEY === "PASTE_YOUR_GEMINI_API_KEY_HERE") {
+        console.error(
+          "Gemini API Error: API_KEY is still the placeholder. Paste a new Gemini API key into js/shared-ui.js.",
+        );
         addMessage(
           "bot",
           "CityWide AI support is ready to connect. Paste your Gemini API key into the API_KEY constant in js/shared-ui.js to enable live responses.",
@@ -738,6 +801,8 @@ Rules:
         chatHistory.push({ role: "model", text: botReply });
       } catch (error) {
         console.error("Gemini API Error:", error);
+        if (error.request) console.log("Gemini Failed Request:", error.request);
+        if (error.response) console.log("Gemini Failed Response:", error.response);
         console.error("CityWide support chatbot error:", error);
         removeTypingIndicator();
         addMessage(
@@ -825,6 +890,14 @@ Rules:
           data?.error?.status ||
           response.statusText ||
           "Unknown Gemini API error";
+        if (
+          response.status === 403 &&
+          /api key|permission_denied|leaked/i.test(`${apiMessage} ${data?.error?.status || ""}`)
+        ) {
+          console.error(
+            "Gemini API key problem: the configured API key is invalid, blocked, or reported as leaked. Generate a new Gemini API key and paste it into API_KEY.",
+          );
+        }
         const error = new Error(
           `Gemini API returned ${response.status} ${response.statusText}: ${apiMessage}`,
         );
@@ -928,13 +1001,15 @@ Rules:
 
   document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
+    enforceRoleAccess();
     if (body.dataset.publicShell === "true") installPublicShell();
     if (body.dataset.dashboardShell)
-      installDashboardShell(body.dataset.dashboardShell);
+      installDashboardShell(shellRole(body.dataset.dashboardShell));
     installThemeToggle();
     installLogoutButtons();
     installHomeHeroSlider();
     installHomeSearchFlow();
+    installItemDetailLinks();
     installListingSearchFilters();
     installSupportChatbot();
   });

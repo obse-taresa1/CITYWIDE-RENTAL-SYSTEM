@@ -1,47 +1,4 @@
 // Email validation function
-const DEFAULT_SUPER_ADMIN = {
-  id: "SA-DEFAULT",
-  fullname: "Super Admin",
-  email: "superadmin@citywide.com",
-  phone: "",
-  password: "SuperAdmin123",
-  role: "superadmin",
-  createdAt: "2026-01-01T00:00:00.000Z",
-  systemAccount: true,
-};
-
-function seedDefaultSuperAdmin() {
-  let users = [];
-  try {
-    users = JSON.parse(localStorage.getItem("users") || "[]");
-  } catch (error) {
-    users = [];
-  }
-
-  const hasDefaultSuperAdmin = users.some(
-    (user) =>
-      user.email &&
-      user.email.toLowerCase() === DEFAULT_SUPER_ADMIN.email.toLowerCase(),
-  );
-
-  const hasAnySuperAdmin = users.some((user) => user.role === "superadmin");
-  if (!hasDefaultSuperAdmin && !hasAnySuperAdmin) {
-    users.push(DEFAULT_SUPER_ADMIN);
-    localStorage.setItem("users", JSON.stringify(users));
-  } else {
-    const dedupedUsers = users.filter((user, index, allUsers) => {
-      if (user.role !== "superadmin") return true;
-      return (
-        allUsers.findIndex((candidate) => candidate.role === "superadmin") ===
-        index
-      );
-    });
-    localStorage.setItem("users", JSON.stringify(dedupedUsers));
-  }
-}
-
-seedDefaultSuperAdmin();
-
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -50,19 +7,62 @@ function validateEmail(email) {
 // Role-based routing function
 function routeBasedOnRole(role) {
   switch (role.toLowerCase()) {
+    case "admin":
+      return "dashboard.html";
+    case "supervisor":
+      return "dashboard.html";
     case "lessee":
+    case "renter":
       return "lessee-dashboard.html";
     case "lessor":
       return "lessor-dashboard.html";
     case "both":
       return "both-dashboard.html";
-    case "admin":
-      return "admin.html";
     case "superadmin":
-      return "super-admin-dashboard.html";
+      return "super-dashboard.html";
     default:
-      return "dashboard.html";
+      return "login.html";
   }
+}
+
+function continuePendingRental(user) {
+  const pendingRental = localStorage.getItem("pendingRental");
+  const redirectAfterLogin = localStorage.getItem("redirectAfterLogin") || "";
+  const redirectUrl = redirectAfterLogin
+    ? new URL(redirectAfterLogin, window.location.href)
+    : null;
+  const itemId =
+    pendingRental ||
+    (redirectUrl && redirectUrl.searchParams.get("id")) ||
+    (redirectUrl && redirectUrl.searchParams.get("itemId")) ||
+    "";
+  const action =
+    (redirectUrl && redirectUrl.searchParams.get("action")) ||
+    (pendingRental || (redirectUrl && redirectUrl.pathname.endsWith("booking.html")) ? "rent" : "");
+
+  localStorage.removeItem("redirectAfterLogin");
+
+  if (itemId && action === "rent") {
+    localStorage.setItem("pendingRental", itemId);
+    const role = (user.role || "").toLowerCase();
+    const allowed = ["renter", "lessee", "both"].includes(role);
+    if (allowed) {
+      window.location.href = `booking.html?itemId=${encodeURIComponent(itemId)}`;
+      return true;
+    }
+
+    const messages = {
+      lessor: "Lessors cannot rent items. Change your role to Both if you want to rent and list items.",
+      admin: "Administrators cannot rent items.",
+      supervisor: "Administrators cannot rent items.",
+      superadmin: "Super Administrators cannot rent items.",
+    };
+    sessionStorage.setItem("rentAccessMessage", messages[role] || "Please log in to rent this item.");
+    window.location.href = `item-details.html?id=${encodeURIComponent(itemId)}`;
+    return true;
+  }
+
+  return false;
 }
 
 // Form submission handler
@@ -98,10 +98,24 @@ document.querySelector("form").addEventListener("submit", function (e) {
   // Store current user in session
   localStorage.setItem("currentUser", JSON.stringify(user));
 
+  if (continuePendingRental(user)) return;
+
   // Route based on role
   const dashboardUrl = routeBasedOnRole(user.role);
   window.location.href = dashboardUrl;
 });
+
+function showLoginNotice() {
+  const message = sessionStorage.getItem("rentAccessMessage");
+  const form = document.querySelector("form");
+  if (!message || !form || document.querySelector("[data-login-notice]")) return;
+
+  form.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="alert alert-warning" data-login-notice>${message}</div>`,
+  );
+  sessionStorage.removeItem("rentAccessMessage");
+}
 
 // Logout function
 function logout() {
@@ -111,8 +125,10 @@ function logout() {
 
 // Check if user is already logged in
 window.addEventListener("load", function () {
+  showLoginNotice();
   const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
   if (currentUser) {
+    if (continuePendingRental(currentUser)) return;
     const dashboardUrl = routeBasedOnRole(currentUser.role);
     window.location.href = dashboardUrl;
   }

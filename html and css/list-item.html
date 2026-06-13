@@ -36,7 +36,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="card card-custom p-4 p-md-5">
-          <form action="dashboard.html" method="get">
+          <form action="dashboard.html" method="get" data-listing-form>
             <div class="mb-3">
               <label class="form-label" for="item-name">Item Name</label>
               <input type="text" class="form-control" id="item-name" placeholder="e.g. Canon EOS DSLR Kit" required>
@@ -85,6 +85,7 @@
               <small class="text-muted">Set the date range when your item is available for rent.</small>
             </div>
             <button type="submit" class="btn btn-primary-custom btn-lg w-100">Publish Listing</button>
+            <p class="small mt-3 mb-0" data-listing-message></p>
           </form>
         </div>
       </div>
@@ -92,6 +93,7 @@
   </main>
 
   <a href="#top" id="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+    <script src="js/listing-system.js"></script>
     <script src="js/shared-ui.js"></script>
   </body>
 </html>

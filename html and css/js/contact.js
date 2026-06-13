@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const messages = readJsonStore("contactMessages");
     messages.push({
-      messageId: "CM-" + Date.now(),
-      senderName: name,
-      senderEmail: email,
+      id: "CM-" + Date.now(),
+      name,
+      email,
       subject,
       message,
-      submittedAt: new Date().toISOString(),
-      status: "Unread",
+      status: "unread",
+      createdAt: new Date().toISOString(),
     });
 
     writeJsonStore("contactMessages", messages);
