@@ -4,9 +4,9 @@
     renter: "lessee-dashboard.html",
     lessor: "lessor-dashboard.html",
     both: "both-dashboard.html",
-    admin: "dashboard.html",
-    supervisor: "dashboard.html",
-    superadmin: "super-dashboard.html",
+    admin: "admin.html",
+    supervisor: "admin.html",
+    superadmin: "super-admin-dashboard.html",
   };
 
   function dashboardForRole(role) {

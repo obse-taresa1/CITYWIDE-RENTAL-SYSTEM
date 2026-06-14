@@ -1,4 +1,5 @@
 ﻿(() => {
+  const LANGUAGE_KEY = "language";
   const API_KEY = "AIzaSyBJbIlFDnvTlGABr2cLiorz22voB6UYJRo";
   const GEMINI_MODEL = "gemini-3.5-flash";
 
@@ -29,11 +30,487 @@ Rules:
 - Do not invent service statuses.
 - If unsure, recommend contacting CityWide support.`;
 
+  const translations = {
+    en: {
+      language: "Language",
+      home: "Home",
+      about: "About",
+      contact: "Contact",
+      items: "Search/Browse Items",
+      listings: "Listings",
+      login: "Login",
+      register: "Register",
+      loginRegister: "Login / Register",
+      rentNow: "Rent Now",
+      viewDetails: "View Details",
+      myBookings: "My Bookings",
+      dashboard: "Dashboard",
+      logout: "Logout",
+      profile: "Profile",
+      messages: "Messages",
+      notifications: "Notifications",
+      browseListings: "Browse Listings",
+      bookingSuccessful: "Booking Successful",
+      bookingConfirmed: "Booking Confirmed!",
+      payConfirmBooking: "Pay & Confirm Booking",
+      bookingRequests: "Booking Requests",
+      pending: "Pending",
+      approved: "Approved",
+      active: "Active",
+      completed: "Completed",
+      cancelled: "Cancelled",
+      footerTagline: "Citywide Item Rental System - trusted rentals across your city.",
+      renterDashboard: "Renter Dashboard",
+      lessorDashboard: "Lessor Dashboard",
+      superAdminDashboard: "Super Admin Dashboard",
+      cityRentDashboard: "CityRent Dashboard",
+      bookings: "Bookings",
+      bookingHistory: "Booking History",
+      activeRentals: "Active Rentals",
+      totalListings: "Total Listings",
+      pendingRequests: "Pending Requests",
+      recentBookings: "Recent Bookings",
+      myListings: "My Listings",
+      editListings: "Edit Listings",
+      deleteListings: "Delete Listings",
+      listItem: "List Item",
+      addListing: "Add Listing",
+      earnings: "Earnings",
+      statistics: "Statistics",
+      users: "Users",
+      reports: "Reports",
+      settings: "Settings",
+      searchListings: "Search Listings",
+      favorites: "Favorites",
+      continueBooking: "Continue Booking",
+      startBooking: "Start a Booking",
+      markCompleted: "Mark Completed",
+      review: "Review",
+      details: "Details",
+      cancelBooking: "Cancel Booking",
+      approve: "Approve",
+      reject: "Reject",
+      action: "Action",
+      actions: "Actions",
+      status: "Status",
+      dates: "Dates",
+      item: "Item",
+      request: "Request",
+      renter: "Renter",
+      lessor: "Lessor",
+      paymentMethod: "Payment Method",
+      priceSummary: "Price Summary",
+      rentalDates: "Rental Dates",
+      pickupDate: "Pick-up Date",
+      returnDate: "Return Date",
+      serviceFee: "Service fee",
+      tax: "Tax",
+      totalDueToday: "Total due today",
+      rentalProtection: "Rental Protection",
+      password: "Password",
+      email: "Email",
+      fullName: "Full Name",
+      phoneNumber: "Phone Number",
+      rememberMe: "Remember Me",
+      forgotPassword: "Forgot Password?",
+      createAccount: "Create Account",
+      signInPrompt: "Sign in to your account",
+      joinCommunity: "Join the citywide rental community",
+      alreadyHaveAccount: "Already have an account?",
+      dontHaveAccount: "Don't have an account?",
+      checking: "Checking...",
+      loginToRent: "Please log in to rent this item.",
+      cannotRentRole: "You cannot rent items with this role.",
+      goToListing: "Go To Listing",
+      allItems: "All Items",
+      usedItems: "Used Items",
+      newItems: "New Items",
+      category: "Category",
+      allCategories: "All Categories",
+      maxPrice: "Max Price",
+      searchRentals: "Search Rentals",
+      exploreAllItems: "Explore All Items",
+      rentVehiclesNear: "Rent Cars & Vehicles Near You",
+      vehicleHeroText: "Browse trusted vehicle rentals from local owners.",
+      electronicsHeroTitle: "Rent Electronics For Any Occasion",
+      electronicsHeroText: "Find laptops, speakers, projectors, gaming devices, and more.",
+      toolsHeroTitle: "Professional Tools On Demand",
+      toolsHeroText: "Rent tools and equipment without the cost of ownership.",
+      camerasHeroTitle: "Camera Rentals For Every Shoot",
+      camerasHeroText: "Book cameras, lenses, and kits for events, content, and creative work.",
+      furnitureHeroTitle: "Furniture Rentals Made Easy",
+      furnitureHeroText: "Affordable furniture rentals for homes and events.",
+      sportsHeroTitle: "Sports Gear Ready When You Are",
+      sportsHeroText: "Rent bikes, golf sets, kayaks, climbing gear, and outdoor equipment.",
+    },
+    om: {
+      language: "Afaan",
+      home: "Mana",
+      about: "Waa'ee Keenya",
+      contact: "Nu Qunnami",
+      items: "Meeshaalee Barbaadi/Ilaali",
+      listings: "Meeshaalee",
+      login: "Seeni",
+      register: "Galmaa'i",
+      loginRegister: "Seeni / Galmaa'i",
+      rentNow: "Kiraa Fudhadhu",
+      viewDetails: "Bal'inaan Ilaali",
+      myBookings: "Kiraawwan Koo",
+      dashboard: "Daashboordii",
+      logout: "Ba'i",
+      profile: "Profaayilii",
+      messages: "Ergaawwan",
+      notifications: "Beeksisawwan",
+      browseListings: "Meeshaalee Ilaali",
+      bookingSuccessful: "Kiraan Milkaa'eera",
+      bookingConfirmed: "Kiraan Mirkanaa'e!",
+      payConfirmBooking: "Kafalii fi Kiraa Mirkaneessi",
+      bookingRequests: "Gaaffiiwwan Kiraa",
+      pending: "Eegamaa",
+      approved: "Mirkanaa'e",
+      active: "Hojii Irra Jira",
+      completed: "Xumurame",
+      cancelled: "Haqame",
+      footerTagline: "Sirna kiraa meeshaalee magaalaa - kiraa amanamaa magaalaa kee keessatti.",
+      renterDashboard: "Daashboordii Kireeffataa",
+      lessorDashboard: "Daashboordii Abbaa Kiraa",
+      superAdminDashboard: "Daashboordii Bulchaa Olaanaa",
+      cityRentDashboard: "Daashboordii CityRent",
+      bookings: "Kiraawwan",
+      bookingHistory: "Seenaa Kiraa",
+      activeRentals: "Kiraawwan Hojii Irra Jiran",
+      totalListings: "Meeshaalee Waliigalaa",
+      pendingRequests: "Gaaffiiwwan Eegaman",
+      recentBookings: "Kiraawwan Dhiyoo",
+      myListings: "Meeshaalee Koo",
+      editListings: "Meeshaalee Gulaali",
+      deleteListings: "Meeshaalee Haqi",
+      listItem: "Meeshaa Galchi",
+      addListing: "Meeshaa Dabaluu",
+      earnings: "Galii",
+      statistics: "Istaatistiksii",
+      users: "Fayyadamtoota",
+      reports: "Gabaasawwan",
+      settings: "Qindaa'ina",
+      searchListings: "Meeshaalee Barbaadi",
+      favorites: "Jaallatamoo",
+      continueBooking: "Kiraa Itti Fufi",
+      startBooking: "Kiraa Jalqabi",
+      markCompleted: "Xumurame Jedhi",
+      review: "Yaada Kenni",
+      details: "Bal'ina",
+      cancelBooking: "Kiraa Haqi",
+      approve: "Mirkaneessi",
+      reject: "Didii",
+      action: "Tarkaanfii",
+      actions: "Tarkaanfiiwwan",
+      status: "Haala",
+      dates: "Guyyoota",
+      item: "Meeshaa",
+      request: "Gaaffii",
+      renter: "Kireeffataa",
+      lessor: "Abbaa Kiraa",
+      paymentMethod: "Mala Kaffaltii",
+      priceSummary: "Cuunfaa Gatii",
+      rentalDates: "Guyyoota Kiraa",
+      pickupDate: "Guyyaa Fudhachuu",
+      returnDate: "Guyyaa Deebisuu",
+      serviceFee: "Kaffaltii tajaajilaa",
+      tax: "Taaksii",
+      totalDueToday: "Waliigala har'a kaffalamu",
+      rentalProtection: "Eegumsa Kiraa",
+      password: "Jecha Darbii",
+      email: "Imeelii",
+      fullName: "Maqaa Guutuu",
+      phoneNumber: "Lakkoofsa Bilbilaa",
+      rememberMe: "Na Yaadadhu",
+      forgotPassword: "Jecha Darbii Dagattee?",
+      createAccount: "Akkaawuntii Uumi",
+      signInPrompt: "Akkaawuntii keetti seeni",
+      joinCommunity: "Hawaasa kiraa magaalaa makami",
+      alreadyHaveAccount: "Akkaawuntii qabdaa?",
+      dontHaveAccount: "Akkaawuntii hin qabduu?",
+      checking: "Sakatta'aa jira...",
+      loginToRent: "Meeshaa kana kireeffachuuf dura seeni.",
+      cannotRentRole: "Gahee kanaan meeshaalee kireeffachuu hin dandeessu.",
+      goToListing: "Gara Tarree Meeshaalee",
+      allItems: "Meeshaalee Hundaa",
+      usedItems: "Meeshaalee Fayyadamaman",
+      newItems: "Meeshaalee Haaraa",
+      category: "Ramaddii",
+      allCategories: "Ramaddiiwwan Hundaa",
+      maxPrice: "Gatii Ol'aanaa",
+      searchRentals: "Kiraa Barbaadi",
+      exploreAllItems: "Meeshaalee Hundaa Ilaali",
+      rentVehiclesNear: "Konkolaataa naannoo keetti kireeffadhu",
+      vehicleHeroText: "Kiraa konkolaataa abbootii naannoo amanamoo irraa ilaali.",
+      electronicsHeroTitle: "Meeshaalee Elektirooniksii yeroof kireeffadhu",
+      electronicsHeroText: "Laaptoppii, sagalee-dabarsituu, piroojeektarii, meeshaalee taphaa fi kanneen biroo argadhu.",
+      toolsHeroTitle: "Meeshaalee hojii ogummaa yeroo barbaadde",
+      toolsHeroText: "Meeshaalee hojii baasii abbummaa malee kireeffadhu.",
+      camerasHeroTitle: "Kaameraa suuraa hojii hundaaf",
+      camerasHeroText: "Kaameraa, leensii fi kiitiiwwan sagantaa, qabiyyee fi hojii kalaqaaf kireeffadhu.",
+      furnitureHeroTitle: "Kiraan meeshaalee mana salphaa ta'e",
+      furnitureHeroText: "Meeshaalee manaaf fi sagantaaf gatii madaalawaan kireeffadhu.",
+      sportsHeroTitle: "Meeshaalee ispoortii yeroo qophooftetti",
+      sportsHeroText: "Biskileetii, kiitii golfii, kaayaakii, meeshaalee olbahinsaa fi meeshaalee alaa kireeffadhu.",
+    },
+  };
+
+  const textKeys = {
+    Home: "home",
+    About: "about",
+    Contact: "contact",
+    "Contact Us": "contact",
+    "Search/Browse Items": "items",
+    "Browse Items": "browseListings",
+    "Browse Listings": "browseListings",
+    Listings: "listings",
+    Login: "login",
+    Register: "register",
+    "Login / Register": "loginRegister",
+    "Register / Login": "loginRegister",
+    "Rent Now": "rentNow",
+    "VIEW DETAILS": "viewDetails",
+    "View Details": "viewDetails",
+    "My Bookings": "myBookings",
+    Dashboard: "dashboard",
+    Logout: "logout",
+    "Sign out": "logout",
+    Profile: "profile",
+    Messages: "messages",
+    Notifications: "notifications",
+    "Booking Successful": "bookingSuccessful",
+    "Booking Confirmed!": "bookingConfirmed",
+    "Pay & Confirm Booking": "payConfirmBooking",
+    "Booking Requests": "bookingRequests",
+    Pending: "pending",
+    Approved: "approved",
+    Active: "active",
+    Completed: "completed",
+    Cancelled: "cancelled",
+    Canceled: "cancelled",
+    "Renter Dashboard": "renterDashboard",
+    "Lessor Dashboard": "lessorDashboard",
+    "Super Admin Dashboard": "superAdminDashboard",
+    "CityRent Dashboard": "cityRentDashboard",
+    Bookings: "bookings",
+    "Booking History": "bookingHistory",
+    "Active Rentals": "activeRentals",
+    "Total Listings": "totalListings",
+    "Pending Requests": "pendingRequests",
+    "Recent Bookings": "recentBookings",
+    "My Listings": "myListings",
+    "Edit Listings": "editListings",
+    "Delete Listings": "deleteListings",
+    "List Item": "listItem",
+    "Add Listing": "addListing",
+    Earnings: "earnings",
+    Statistics: "statistics",
+    Users: "users",
+    Reports: "reports",
+    Settings: "settings",
+    "Search Listings": "searchListings",
+    Favorites: "favorites",
+    "Continue Booking": "continueBooking",
+    "Start a Booking": "startBooking",
+    "Mark Completed": "markCompleted",
+    Review: "review",
+    Details: "details",
+    "Cancel Booking": "cancelBooking",
+    Approve: "approve",
+    Reject: "reject",
+    Action: "action",
+    Actions: "actions",
+    Status: "status",
+    Dates: "dates",
+    Item: "item",
+    Request: "request",
+    Renter: "renter",
+    Lessor: "lessor",
+    "Payment Method": "paymentMethod",
+    "Price Summary": "priceSummary",
+    "Rental Dates": "rentalDates",
+    "Pick-up Date": "pickupDate",
+    "Return Date": "returnDate",
+    "Service fee": "serviceFee",
+    Tax: "tax",
+    "Total due today": "totalDueToday",
+    "Rental Protection": "rentalProtection",
+    Password: "password",
+    Email: "email",
+    "Full Name": "fullName",
+    "Phone Number": "phoneNumber",
+    "Remember Me": "rememberMe",
+    "Forgot Password?": "forgotPassword",
+    "Create Account": "createAccount",
+    "Welcome Back": "login",
+    "Sign in to your account": "signInPrompt",
+    "Join the citywide rental community": "joinCommunity",
+    "Already have an account?": "alreadyHaveAccount",
+    "Don't have an account?": "dontHaveAccount",
+    "Checking...": "checking",
+    "Please log in to rent this item.": "loginToRent",
+    "You cannot rent items with this role.": "cannotRentRole",
+    "Go To Listing": "goToListing",
+    "All Items": "allItems",
+    "Used Items": "usedItems",
+    "New Items": "newItems",
+    Category: "category",
+    "All Categories": "allCategories",
+    "Max Price": "maxPrice",
+    "Search Rentals": "searchRentals",
+    "Explore All Items": "exploreAllItems",
+    "Rent Cars & Vehicles Near You": "rentVehiclesNear",
+    "Browse trusted vehicle rentals from local owners.": "vehicleHeroText",
+    "Rent Electronics For Any Occasion": "electronicsHeroTitle",
+    "Find laptops, speakers, projectors, gaming devices, and more.": "electronicsHeroText",
+    "Professional Tools On Demand": "toolsHeroTitle",
+    "Rent tools and equipment without the cost of ownership.": "toolsHeroText",
+    "Camera Rentals For Every Shoot": "camerasHeroTitle",
+    "Book cameras, lenses, and kits for events, content, and creative work.": "camerasHeroText",
+    "Furniture Rentals Made Easy": "furnitureHeroTitle",
+    "Affordable furniture rentals for homes and events.": "furnitureHeroText",
+    "Sports Gear Ready When You Are": "sportsHeroTitle",
+    "Rent bikes, golf sets, kayaks, climbing gear, and outdoor equipment.": "sportsHeroText",
+    "Complete Your Booking": "payConfirmBooking",
+    "Go to Dashboard": "dashboard",
+  };
+
+  Object.entries(translations.en).forEach(([key, value]) => {
+    textKeys[value] = key;
+  });
+
+  const nodeTranslationKeys = new WeakMap();
+  let i18nObserver;
+  let isApplyingLanguage = false;
+
+  function currentLanguage() {
+    const saved = localStorage.getItem(LANGUAGE_KEY);
+    return translations[saved] ? saved : "en";
+  }
+
+  function t(keyOrText) {
+    const key = translations.en[keyOrText] ? keyOrText : textKeys[keyOrText];
+    if (!key) return keyOrText;
+    return translations[currentLanguage()][key] || translations.en[key] || keyOrText;
+  }
+
+  function languageSwitcher() {
+    const lang = currentLanguage();
+    return `<label class="language-switcher" aria-label="${t("language")}">
+      <i class="bi bi-globe2" aria-hidden="true"></i>
+      <select data-language-switcher aria-label="${t("language")}">
+        <option value="en"${lang === "en" ? " selected" : ""}>English</option>
+        <option value="om"${lang === "om" ? " selected" : ""}>Afaan Oromo</option>
+      </select>
+    </label>`;
+  }
+
+  function translateStoredAttribute(element, attrName) {
+    const dataName = `i18nOriginal${attrName.replace(/[^a-z0-9]/gi, "")}`;
+    if (!element.dataset[dataName]) element.dataset[dataName] = element.getAttribute(attrName) || "";
+    const original = element.dataset[dataName];
+    const translated = t(original);
+    if (translated !== original || currentLanguage() === "en") element.setAttribute(attrName, translated);
+  }
+
+  function translateTextNode(node) {
+    const raw = node.nodeValue || "";
+    const trimmed = raw.trim();
+    if (!trimmed) return;
+    const key = nodeTranslationKeys.get(node) || textKeys[trimmed];
+    if (!key) return;
+    nodeTranslationKeys.set(node, key);
+    const translated = translations[currentLanguage()][key] || translations.en[key] || trimmed;
+    node.nodeValue = raw.replace(trimmed, translated);
+  }
+
+  function translateTree(root = document.body) {
+    if (!root) return;
+
+    root.querySelectorAll("[data-i18n]").forEach((element) => {
+      const key = element.dataset.i18n;
+      if (translations.en[key]) element.textContent = t(key);
+    });
+    root.querySelectorAll("[placeholder]").forEach((element) => translateStoredAttribute(element, "placeholder"));
+    root.querySelectorAll("[aria-label]").forEach((element) => translateStoredAttribute(element, "aria-label"));
+    root.querySelectorAll("[title]").forEach((element) => translateStoredAttribute(element, "title"));
+
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || ["SCRIPT", "STYLE", "TEXTAREA", "OPTION"].includes(parent.tagName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+
+    let node = walker.nextNode();
+    while (node) {
+      translateTextNode(node);
+      node = walker.nextNode();
+    }
+  }
+
+  function applyLanguage(language = currentLanguage()) {
+    const selected = translations[language] ? language : "en";
+    isApplyingLanguage = true;
+    localStorage.setItem(LANGUAGE_KEY, selected);
+    document.documentElement.lang = selected;
+    document.querySelectorAll("[data-language-switcher]").forEach((select) => {
+      select.value = selected;
+    });
+    translateTree(document.body);
+    window.dispatchEvent(new CustomEvent("cityrent:languagechange", { detail: { language: selected } }));
+    isApplyingLanguage = false;
+  }
+
+  function installLanguageControls() {
+    document.querySelectorAll("[data-language-switcher]").forEach((select) => {
+      select.value = currentLanguage();
+      select.addEventListener("change", () => applyLanguage(select.value));
+    });
+
+    const adminActions = document.querySelector(".admin-console-actions");
+    if (adminActions && !adminActions.querySelector("[data-language-switcher]")) {
+      adminActions.insertAdjacentHTML("afterbegin", languageSwitcher());
+      adminActions.querySelector("[data-language-switcher]")?.addEventListener("change", (event) => {
+        applyLanguage(event.target.value);
+      });
+    }
+  }
+
+  function observeLanguageUpdates() {
+    if (i18nObserver || !document.body) return;
+    i18nObserver = new MutationObserver((mutations) => {
+      if (isApplyingLanguage) return;
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.TEXT_NODE) translateTextNode(node);
+          if (node.nodeType === Node.ELEMENT_NODE) translateTree(node);
+        });
+      });
+    });
+    i18nObserver.observe(document.body, { childList: true, subtree: true });
+  }
+
+  window.CityRentI18n = {
+    translations,
+    t,
+    currentLanguage,
+    applyLanguage,
+    refresh: () => applyLanguage(currentLanguage()),
+    installLanguageControls,
+    languageSwitcher,
+  };
+
   const navLinks = [
-    { href: "index.html", label: "Home", key: "home" },
-    { href: "our-story.html", label: "About", key: "about" },
-    { href: "contact.html", label: "Contact", key: "contact" },
-    { href: "items.html", label: "Search/Browse Items", key: "items" },
+    { href: "index.html", label: "Home", key: "home", i18n: "home" },
+    { href: "our-story.html", label: "About", key: "about", i18n: "about" },
+    { href: "contact.html", label: "Contact", key: "contact", i18n: "contact" },
+    { href: "items.html", label: "Search/Browse Items", key: "items", i18n: "items" },
   ];
 
   const categoryRoutes = {
@@ -175,9 +652,6 @@ Rules:
       return;
     }
 
-    if (role === "lessor" && page === "booking.html" && window.location.hash !== "#requests") {
-      window.location.replace("booking.html#requests");
-    }
   }
 
   function shellRole(requestedRole) {
@@ -240,10 +714,10 @@ Rules:
       <details class="profile-menu">
         <summary aria-label="Open profile menu"><img src="https://i.pravatar.cc/40?img=33" alt="User profile"><span>Alex</span><i class="bi bi-chevron-down"></i></summary>
         <div class="profile-menu-list">
-          <a href="profile.html"><i class="bi bi-person"></i> Profile</a>
-          <a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
-          <a href="messages.html"><i class="bi bi-chat-dots"></i> Messages</a>
-          <a href="login.html"><i class="bi bi-box-arrow-right"></i> Sign out</a>
+          <a href="profile.html"><i class="bi bi-person"></i> ${t("profile")}</a>
+          <a href="dashboard.html"><i class="bi bi-speedometer2"></i> ${t("dashboard")}</a>
+          <a href="messages.html"><i class="bi bi-chat-dots"></i> ${t("messages")}</a>
+          <a href="login.html"><i class="bi bi-box-arrow-right"></i> ${t("logout")}</a>
         </div>
       </details>`;
   }
@@ -255,11 +729,11 @@ Rules:
       <details class="profile-menu public-profile-menu">
         <summary aria-label="Open profile menu"><img src="https://i.pravatar.cc/40?img=33" alt="User profile"><span>${name}</span><i class="bi bi-chevron-down"></i></summary>
         <div class="profile-menu-list">
-          <a href="profile.html"><i class="bi bi-person"></i> Profile</a>
-          <a href="${dashboardForRole(user?.role)}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+          <a href="profile.html"><i class="bi bi-person"></i> ${t("profile")}</a>
+          <a href="${dashboardForRole(user?.role)}"><i class="bi bi-speedometer2"></i> ${t("dashboard")}</a>
         </div>
       </details>
-      <button class="nav-login nav-logout-btn" type="button" data-logout>Logout</button>
+      <button class="nav-login nav-logout-btn" type="button" data-logout>${t("logout")}</button>
     </div>`;
   }
 
@@ -296,18 +770,18 @@ Rules:
     const links = navLinks
       .map(
         (link) =>
-          `<li><a href="${link.href}" class="${link.key === active ? "active" : ""}">${link.label}</a></li>`,
+          `<li><a href="${link.href}" class="${link.key === active ? "active" : ""}">${t(link.i18n)}</a></li>`,
       )
       .join("");
     const authButtons = isAuthenticated()
       ? publicAccountActions()
-      : '<div class="public-auth-actions"><a href="login.html" class="nav-login">Login / Register</a></div>';
+      : `<div class="public-auth-actions"><a href="login.html" class="nav-login">${t("loginRegister")}</a></div>`;
     return `<header class="motorx-header app-public-header">
       <div class="container"><div class="motorx-nav-flex">
         <a class="motorx-logo" href="index.html"><img src="images/logo.png" alt="CityRent Logo"></a>
         <input type="checkbox" id="nav-toggle" class="nav-check" aria-label="Open menu">
         <label for="nav-toggle" class="nav-toggler-label"><i class="bi bi-list"></i></label>
-        <nav class="motorx-nav-menu"><ul class="motorx-nav-links">${links}</ul><div class="motorx-nav-actions">${themeToggle()}${authButtons}</div></nav>
+        <nav class="motorx-nav-menu"><ul class="motorx-nav-links">${links}</ul><div class="motorx-nav-actions">${languageSwitcher()}${themeToggle()}${authButtons}</div></nav>
       </div></div>
     </header>`;
   }
@@ -315,9 +789,9 @@ Rules:
   function footer() {
     return `<footer class="motorx-footer">
       <div class="container"><div class="footer-flex">
-        <div><a class="motorx-logo text-white mb-3 d-inline-block" href="index.html"><img src="images/logo.png" alt="CityRent Logo"></a><p class="small">Citywide Item Rental System - trusted rentals across your city.</p></div>
-        <div><h5>About</h5><a href="our-story.html">Our Story</a><a href="careers.html">Careers</a></div>
-        <div><h5>Contact</h5><a href="contact.html">Contact Us</a><a href="mailto:support@cityrent.com">support@cityrent.com</a></div>
+        <div><a class="motorx-logo text-white mb-3 d-inline-block" href="index.html"><img src="images/logo.png" alt="CityRent Logo"></a><p class="small">${t("footerTagline")}</p></div>
+        <div><h5>${t("about")}</h5><a href="our-story.html">Our Story</a><a href="careers.html">Careers</a></div>
+        <div><h5>${t("contact")}</h5><a href="contact.html">${t("contact")}</a><a href="mailto:support@cityrent.com">support@cityrent.com</a></div>
         <div><h5>Legal</h5><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a></div>
         <div><div class="top-bar-social"><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></div></div>
       </div><div class="footer-bottom"><p class="mb-0">&copy; 2026 CityRent. All rights reserved.</p></div></div>
@@ -328,8 +802,8 @@ Rules:
     return `<header class="motorx-header dashboard-topbar">
       <div class="container-fluid px-3"><div class="motorx-nav-flex">
         <a class="motorx-logo dashboard-logo" href="index.html"><img src="images/logo.png" alt="CityRent Logo"></a>
-        <div class="dashboard-topbar-title">${roleLabels[role] || "Dashboard"}</div>
-        <div class="motorx-nav-actions">${themeToggle()}${userActions()}<a href="index.html" class="nav-login" onclick="if (typeof logout === 'function') logout()">Logout</a></div>
+        <div class="dashboard-topbar-title">${t(roleLabels[role] || "Dashboard")}</div>
+        <div class="motorx-nav-actions">${languageSwitcher()}${themeToggle()}${userActions()}<a href="index.html" class="nav-login" onclick="if (typeof logout === 'function') logout()">${t("logout")}</a></div>
       </div></div>
     </header>`;
   }
@@ -343,10 +817,10 @@ Rules:
         const isActive =
           base === page ||
           (page === "dashboard.html" && href === "dashboard.html");
-        return `<a href="${href}" class="${isActive ? "active" : ""}"><i class="bi ${icon}"></i><span>${label}</span></a>`;
+        return `<a href="${href}" class="${isActive ? "active" : ""}"><i class="bi ${icon}"></i><span>${t(label)}</span></a>`;
       })
       .join("");
-    return `<aside class="sidebar dashboard-sidebar"><nav class="sidebar-nav">${links}<a class="logout-link" href="login.html"><i class="bi bi-box-arrow-right"></i><span>Logout</span></a></nav></aside>`;
+    return `<aside class="sidebar dashboard-sidebar"><nav class="sidebar-nav">${links}<a class="logout-link" href="login.html"><i class="bi bi-box-arrow-right"></i><span>${t("logout")}</span></a></nav></aside>`;
   }
 
   function removeExistingChrome() {
@@ -429,8 +903,8 @@ Rules:
         dot.setAttribute("aria-current", isActive ? "true" : "false");
       });
 
-      if (title) title.textContent = activeSlide.dataset.title || "";
-      if (subtitle) subtitle.textContent = activeSlide.dataset.subtitle || "";
+      if (title) title.textContent = t(activeSlide.dataset.title || "");
+      if (subtitle) subtitle.textContent = t(activeSlide.dataset.subtitle || "");
       if (cardTitle) cardTitle.textContent = activeSlide.dataset.cardTitle || "";
       if (cardPrice) cardPrice.textContent = activeSlide.dataset.cardPrice || "";
       if (cardLocation) cardLocation.textContent = activeSlide.dataset.cardLocation || "";
@@ -999,12 +1473,15 @@ Rules:
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function initSharedUI() {
+    if (document.body?.dataset.sharedUiReady === "true") return;
+    if (document.body) document.body.dataset.sharedUiReady = "true";
     const body = document.body;
     enforceRoleAccess();
     if (body.dataset.publicShell === "true") installPublicShell();
     if (body.dataset.dashboardShell)
       installDashboardShell(shellRole(body.dataset.dashboardShell));
+    installLanguageControls();
     installThemeToggle();
     installLogoutButtons();
     installHomeHeroSlider();
@@ -1012,5 +1489,13 @@ Rules:
     installItemDetailLinks();
     installListingSearchFilters();
     installSupportChatbot();
-  });
+    applyLanguage(currentLanguage());
+    observeLanguageUpdates();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSharedUI);
+  } else {
+    initSharedUI();
+  }
 })();

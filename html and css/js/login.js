@@ -8,9 +8,9 @@ function validateEmail(email) {
 function routeBasedOnRole(role) {
   switch (role.toLowerCase()) {
     case "admin":
-      return "dashboard.html";
+      return "admin.html";
     case "supervisor":
-      return "dashboard.html";
+      return "admin.html";
     case "lessee":
     case "renter":
       return "lessee-dashboard.html";
@@ -19,50 +19,40 @@ function routeBasedOnRole(role) {
     case "both":
       return "both-dashboard.html";
     case "superadmin":
-      return "super-dashboard.html";
+      return "super-admin-dashboard.html";
     default:
       return "login.html";
   }
 }
 
-function continuePendingRental(user) {
-  const pendingRental = localStorage.getItem("pendingRental");
+function continuePendingRental() {
   const redirectAfterLogin = localStorage.getItem("redirectAfterLogin") || "";
-  const redirectUrl = redirectAfterLogin
-    ? new URL(redirectAfterLogin, window.location.href)
-    : null;
-  const itemId =
-    pendingRental ||
-    (redirectUrl && redirectUrl.searchParams.get("id")) ||
-    (redirectUrl && redirectUrl.searchParams.get("itemId")) ||
-    "";
-  const action =
-    (redirectUrl && redirectUrl.searchParams.get("action")) ||
-    (pendingRental || (redirectUrl && redirectUrl.pathname.endsWith("booking.html")) ? "rent" : "");
+  if (!redirectAfterLogin) return false;
+
+  let redirectUrl;
+  try {
+    redirectUrl = new URL(redirectAfterLogin, window.location.href);
+  } catch (error) {
+    localStorage.removeItem("redirectAfterLogin");
+    return false;
+  }
+
+  const page = redirectUrl.pathname.split("/").pop();
+  const itemId = redirectUrl.searchParams.get("id") || redirectUrl.searchParams.get("itemId") || "";
+  const isRentAttempt =
+    redirectUrl.origin === window.location.origin &&
+    itemId &&
+    (redirectUrl.searchParams.get("action") === "rent" || page === "booking.html");
 
   localStorage.removeItem("redirectAfterLogin");
 
-  if (itemId && action === "rent") {
-    localStorage.setItem("pendingRental", itemId);
-    const role = (user.role || "").toLowerCase();
-    const allowed = ["renter", "lessee", "both"].includes(role);
-    if (allowed) {
-      window.location.href = `booking.html?itemId=${encodeURIComponent(itemId)}`;
-      return true;
-    }
-
-    const messages = {
-      lessor: "Lessors cannot rent items. Change your role to Both if you want to rent and list items.",
-      admin: "Administrators cannot rent items.",
-      supervisor: "Administrators cannot rent items.",
-      superadmin: "Super Administrators cannot rent items.",
-    };
-    sessionStorage.setItem("rentAccessMessage", messages[role] || "Please log in to rent this item.");
-    window.location.href = `item-details.html?id=${encodeURIComponent(itemId)}`;
-    return true;
+  if (!isRentAttempt) {
+    return false;
   }
 
-  return false;
+  localStorage.setItem("pendingRental", itemId);
+  window.location.href = `item-details.html?id=${encodeURIComponent(itemId)}&action=rent`;
+  return true;
 }
 
 // Form submission handler
@@ -98,24 +88,12 @@ document.querySelector("form").addEventListener("submit", function (e) {
   // Store current user in session
   localStorage.setItem("currentUser", JSON.stringify(user));
 
-  if (continuePendingRental(user)) return;
+  if (continuePendingRental()) return;
 
   // Route based on role
   const dashboardUrl = routeBasedOnRole(user.role);
   window.location.href = dashboardUrl;
 });
-
-function showLoginNotice() {
-  const message = sessionStorage.getItem("rentAccessMessage");
-  const form = document.querySelector("form");
-  if (!message || !form || document.querySelector("[data-login-notice]")) return;
-
-  form.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="alert alert-warning" data-login-notice>${message}</div>`,
-  );
-  sessionStorage.removeItem("rentAccessMessage");
-}
 
 // Logout function
 function logout() {
@@ -125,10 +103,10 @@ function logout() {
 
 // Check if user is already logged in
 window.addEventListener("load", function () {
-  showLoginNotice();
+  sessionStorage.removeItem("rentAccessMessage");
   const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
   if (currentUser) {
-    if (continuePendingRental(currentUser)) return;
+    if (continuePendingRental()) return;
     const dashboardUrl = routeBasedOnRole(currentUser.role);
     window.location.href = dashboardUrl;
   }

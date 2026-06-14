@@ -1,4 +1,10 @@
 (function () {
+  if (!window.CityRentI18n && !document.querySelector('script[src="js/shared-ui.js"]')) {
+    const sharedScript = document.createElement("script");
+    sharedScript.src = "js/shared-ui.js";
+    document.head.appendChild(sharedScript);
+  }
+
   const adminPages = {
     "dashboard.html": ["bi-speedometer2", "Dashboard"],
     "users.html": ["bi-people", "Users"],
@@ -342,6 +348,8 @@
       setTheme((document.documentElement.dataset.theme || "light") === "dark" ? "light" : "dark");
     });
     setTheme(localStorage.getItem("theme") || "light");
+    window.CityRentI18n?.installLanguageControls();
+    window.CityRentI18n?.refresh();
   }
 
   function statCards(cards) {

@@ -138,7 +138,7 @@ function dashboardForRole(role) {
 function showRentMessage(message) {
   const authMessage = document.getElementById("auth-message");
   if (!authMessage) return;
-  authMessage.textContent = message;
+  authMessage.textContent = window.CityRentI18n?.t(message) || message;
   authMessage.hidden = false;
 }
 
@@ -146,13 +146,12 @@ function handleRentNow(itemId) {
   const rentButton = document.getElementById("rent-now-btn");
 
   rentButton.disabled = true;
-  rentButton.textContent = "Checking...";
+  rentButton.textContent = window.CityRentI18n?.t("Checking...") || "Checking...";
   localStorage.setItem("pendingRental", itemId);
 
   if (!isLoggedIn()) {
     showRentMessage("Please log in to rent this item.");
-    sessionStorage.setItem("rentAccessMessage", "Please log in to rent this item.");
-    localStorage.setItem("redirectAfterLogin", `item-details.html?id=${itemId}&action=rent`);
+    localStorage.setItem("redirectAfterLogin", `item-details.html?id=${encodeURIComponent(itemId)}&action=rent`);
     window.location.href = "login.html";
     return;
   }
@@ -167,7 +166,7 @@ function handleRentNow(itemId) {
 
   showRentMessage(window.CityRentRentAccess?.rentBlockedMessage(role) || "You cannot rent items with this role.");
   rentButton.disabled = false;
-  rentButton.textContent = "Rent Now";
+  rentButton.textContent = window.CityRentI18n?.t("Rent Now") || "Rent Now";
 }
 
 function renderThumbnails(item) {
@@ -216,7 +215,7 @@ function loadItem(itemId) {
 
     const rentButton = document.getElementById("rent-now-btn");
     rentButton.disabled = false;
-    rentButton.textContent = "Rent Now";
+    rentButton.textContent = window.CityRentI18n?.t("Rent Now") || "Rent Now";
     rentButton.addEventListener("click", () => handleRentNow(itemId));
 
     content.hidden = false;
@@ -232,6 +231,7 @@ function loadItem(itemId) {
     if (params.get("action") === "rent" && isLoggedIn()) {
       handleRentNow(itemId);
     }
+    window.CityRentI18n?.refresh();
   }, 250);
 }
 

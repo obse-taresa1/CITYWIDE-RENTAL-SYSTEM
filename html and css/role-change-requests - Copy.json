@@ -1,0 +1,42 @@
+[
+  {
+    "requestId": "R-1001",
+    "userName": "John Smith",
+    "userEmail": "john.smith@example.com",
+    "currentRole": "lessor",
+    "requestedRole": "lessee",
+    "reason": "I want to focus on renting items instead of listing them",
+    "requestDate": "2026-06-01T10:30:00.000Z",
+    "status": "Pending"
+  },
+  {
+    "requestId": "R-1002",
+    "userName": "Sarah Johnson",
+    "userEmail": "sarah.johnson@example.com",
+    "currentRole": "lessee",
+    "requestedRole": "both",
+    "reason": "I want to start listing my own items while continuing to rent from others",
+    "requestDate": "2026-06-02T14:15:00.000Z",
+    "status": "Pending"
+  },
+  {
+    "requestId": "R-1003",
+    "userName": "Mike Davis",
+    "userEmail": "mike.davis@example.com",
+    "currentRole": "both",
+    "requestedRole": "lessor",
+    "reason": "I want to focus only on being a lessor",
+    "requestDate": "2026-06-03T09:00:00.000Z",
+    "status": "Approved"
+  },
+  {
+    "requestId": "R-1004",
+    "userName": "Emily Brown",
+    "userEmail": "emily.brown@example.com",
+    "currentRole": "lessee",
+    "requestedRole": "lessor",
+    "reason": "I have acquired many items I want to rent out",
+    "requestDate": "2026-06-04T16:45:00.000Z",
+    "status": "Rejected"
+  }
+]

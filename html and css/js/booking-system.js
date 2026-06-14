@@ -45,6 +45,14 @@
     return itemTitles[itemId] || "Selected rental item";
   }
 
+  function t(value) {
+    return window.CityRentI18n?.t(value) || value;
+  }
+
+  function refreshLanguage() {
+    window.CityRentI18n?.refresh();
+  }
+
   function userBookings() {
     const user = currentUser();
     const id = user?.id || user?.email || "";
@@ -102,12 +110,12 @@
             return `<tr>
               <td>${booking.title}</td>
               <td>${booking.startDate || "Not set"} - ${booking.endDate || "Not set"}</td>
-              <td><span class="badge-status badge-active">${booking.status}</span></td>
+              <td><span class="badge-status badge-active">${t(booking.status)}</span></td>
               <td>
                 ${
                   isCompleted
-                    ? `<a class="btn btn-sm btn-primary-custom" href="item-details.html?id=${encodeURIComponent(booking.itemId)}">Review</a>`
-                    : `<button class="btn btn-sm btn-outline-custom" data-complete-booking="${booking.id}">Mark Completed</button>`
+                    ? `<a class="btn btn-sm btn-primary-custom" href="item-details.html?id=${encodeURIComponent(booking.itemId)}">${t("Review")}</a>`
+                    : `<button class="btn btn-sm btn-outline-custom" data-complete-booking="${booking.id}">${t("Mark Completed")}</button>`
                 }
               </td>
             </tr>`;
@@ -121,12 +129,12 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
           <div>
             <span class="section-label">BOOKING CENTER</span>
-            <h2 class="h5 mb-1">${itemId ? "Continue Your Booking" : "Start a Booking"}</h2>
+            <h2 class="h5 mb-1">${itemId ? t("Continue Booking") : t("Start a Booking")}</h2>
             <p class="text-muted mb-0">${itemId ? itemTitle(itemId) : "Renters and both-role users can book items from here."}</p>
           </div>
           <div class="d-flex flex-wrap gap-2">
-            ${itemId ? `<a class="btn btn-primary-custom" href="booking.html?itemId=${encodeURIComponent(itemId)}"><i class="bi bi-calendar-check"></i> Continue Booking</a>` : ""}
-            <a class="btn btn-outline-custom" href="items.html"><i class="bi bi-search"></i> Browse Listings</a>
+            ${itemId ? `<a class="btn btn-primary-custom" href="booking.html?itemId=${encodeURIComponent(itemId)}"><i class="bi bi-calendar-check"></i> ${t("Continue Booking")}</a>` : ""}
+            <a class="btn btn-outline-custom" href="items.html"><i class="bi bi-search"></i> ${t("Browse Listings")}</a>
           </div>
         </div>
         <div class="table-responsive mt-4">
@@ -137,6 +145,7 @@
         </div>
       </section>`,
     );
+    refreshLanguage();
   }
 
   function hydrateBookingPage() {
@@ -165,6 +174,7 @@
       });
       writeBookings(bookings);
       localStorage.removeItem("pendingRental");
+      refreshLanguage();
     });
   }
 

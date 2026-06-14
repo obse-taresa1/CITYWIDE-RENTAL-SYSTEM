@@ -3484,6 +3484,45 @@ body[data-public-shell="true"] .auth-page {
   transform: translateY(-2px);
 }
 
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  padding: 0 0.65rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-weight: 800;
+}
+
+.language-switcher i {
+  font-size: 1rem;
+}
+
+.language-switcher select {
+  min-width: 7.5rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: 0;
+  cursor: pointer;
+}
+
+.language-switcher select option {
+  color: #172033;
+}
+
+.app-public-header .language-switcher,
+.dashboard-topbar .language-switcher,
+.admin-console-actions .language-switcher {
+  border-color: var(--border-color);
+  background: var(--card-bg);
+  color: var(--secondary-color);
+}
+
 .theme-icon-dark { display: none; }
 .theme-icon-light { display: inline-flex; }
 [data-theme="dark"] .theme-icon-dark { display: inline-flex; }
@@ -3834,8 +3873,17 @@ main.page-header.dashboard-main,
 
   .app-public-header .motorx-nav-actions {
     display: grid;
-    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 42px;
     width: 100%;
+  }
+
+  .app-public-header .public-auth-actions,
+  .app-public-header .public-account-actions {
+    grid-column: 1 / -1;
+  }
+
+  .app-public-header .language-switcher {
+    min-width: 0;
   }
 
   .profile-menu summary,

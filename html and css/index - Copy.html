@@ -1,0 +1,559 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CityRent â€” Premium Citywide Item Rental</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body id="top" class="motorx-home" data-public-shell="true">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-flex">
+          <div class="top-bar-contact">
+            <span
+              ><i class="bi bi-telephone-fill"></i> Hotline: (+1)
+              800-555-1234</span
+            >
+            <span
+              ><i class="bi bi-envelope-fill"></i> support@cityrent.com</span
+            >
+          </div>
+          <div class="top-bar-social">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="bi bi-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navbar -->
+    <header class="motorx-header">
+      <div class="container">
+        <div class="motorx-nav-flex">
+          <a class="motorx-logo" href="index.html"
+            ><img src="images/logo.png" alt="CityRent Logo"
+          /></a>
+          <input
+            type="checkbox"
+            id="nav-toggle"
+            class="nav-check"
+            aria-label="Open menu"
+          />
+          <label for="nav-toggle" class="nav-toggler-label"
+            ><i class="bi bi-list"></i
+          ></label>
+          <nav class="motorx-nav-menu">
+            <ul class="motorx-nav-links">
+              <li><a href="index.html" class="active">Home</a></li>
+              <li><a href="#brands">Categories</a></li>
+              <li><a href="how-it-works.html">How It Works</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <div class="motorx-nav-actions">
+              <a href="login.html" class="nav-login">Register / Login</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="motorx-hero" data-hero-slider>
+      <div class="motorx-hero-bg" aria-hidden="true">
+        <div
+          class="hero-slide is-active"
+          style="background-image: url('images/Toyota RAV4.jpg')"
+          data-title="Rent Cars & Vehicles Near You"
+          data-subtitle="Browse trusted vehicle rentals from local owners."
+          data-card-title="Toyota RAV4 2023"
+          data-card-price="$65"
+          data-card-location="Downtown"
+          data-card-image="images/Toyota RAV4.jpg"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/pc.png')"
+          data-title="Rent Electronics For Any Occasion"
+          data-subtitle="Find laptops, speakers, projectors, gaming devices, and more."
+          data-card-title="Gaming Laptop RTX 4070"
+          data-card-price="$35"
+          data-card-location="Midtown"
+          data-card-image="images/pc.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/dewalt.png')"
+          data-title="Professional Tools On Demand"
+          data-subtitle="Rent tools and equipment without the cost of ownership."
+          data-card-title="DeWalt Power Drill Set"
+          data-card-price="$18"
+          data-card-location="Westside"
+          data-card-image="images/dewalt.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/canon.png')"
+          data-title="Camera Rentals For Every Shoot"
+          data-subtitle="Book cameras, lenses, and kits for events, content, and creative work."
+          data-card-title="Canon EOS DSLR Kit"
+          data-card-price="$45"
+          data-card-location="Downtown"
+          data-card-image="images/canon.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/furnsofa.png')"
+          data-title="Furniture Rentals Made Easy"
+          data-subtitle="Affordable furniture rentals for homes and events."
+          data-card-title="Modern Sectional Sofa"
+          data-card-price="$55"
+          data-card-location="Uptown"
+          data-card-image="images/furnsofa.png"
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url('images/sportbick.png')"
+          data-title="Sports Gear Ready When You Are"
+          data-subtitle="Rent bikes, golf sets, kayaks, climbing gear, and outdoor equipment."
+          data-card-title="Mountain Bike Pro"
+          data-card-price="$15"
+          data-card-location="Park"
+          data-card-image="images/sportbick.png"
+        ></div>
+      </div>
+      <div class="container motorx-hero-inner">
+        <div class="hero-layout">
+          <div class="hero-text">
+            <span class="hero-tag">TRUSTED DEALER, RENTAL</span>
+            <h1 data-hero-title>Rent Cars & Vehicles Near You</h1>
+            <p data-hero-subtitle>
+              Browse trusted vehicle rentals from local owners.
+            </p>
+            <div class="hero-cta">
+              <a href="items.html" class="btn-hero-primary">Go To Listing</a>
+              <a
+                href="how-it-works.html"
+                class="btn-hero-play"
+                aria-label="Watch video"
+                ><i class="bi bi-play-fill"></i
+              ></a>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="hero-discount-badge">
+              <span class="discount-pct">40%</span>
+              <span class="discount-off">OFF</span>
+            </div>
+            <div class="hero-float-card">
+              <img
+                src="images/Toyota RAV4.jpg"
+                alt="Featured rental item"
+                data-hero-card-img
+              />
+              <div>
+                <strong data-hero-card-title>Toyota RAV4 2023</strong>
+                <span class="float-price"
+                  ><span data-hero-card-price>$65</span> <small>/ day</small></span
+                >
+                <span class="float-loc"
+                  ><i class="bi bi-geo-alt"></i>
+                  <span data-hero-card-location>Downtown</span></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slider-controls" aria-label="Hero slider controls">
+          <button
+            type="button"
+            class="hero-slider-arrow"
+            data-hero-prev
+            aria-label="Previous hero slide"
+          >
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <div class="hero-slider-dots" data-hero-dots aria-label="Hero slides"></div>
+          <button
+            type="button"
+            class="hero-slider-arrow"
+            data-hero-next
+            aria-label="Next hero slide"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search / Filter Bar (overlapping hero) -->
+      <div class="container motorx-search-wrap">
+        <div class="motorx-search-card">
+          <input
+            type="radio"
+            name="item-tab"
+            id="tab-all"
+            class="tab-radio"
+            checked
+          />
+          <input type="radio" name="item-tab" id="tab-used" class="tab-radio" />
+          <input type="radio" name="item-tab" id="tab-new" class="tab-radio" />
+          <div class="search-tabs">
+            <label for="tab-all">All Items</label>
+            <label for="tab-used">Used Items</label>
+            <label for="tab-new">New Items</label>
+          </div>
+          <form class="search-form-flex home-search-form" data-home-search method="get">
+            <div class="search-field">
+              <label for="home-search-category">Category</label>
+              <select class="form-select" id="home-search-category" name="category">
+                <option value="all">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="tools">Tools</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="cameras">Cameras</option>
+                <option value="sports">Sports</option>
+                <option value="furniture">Furniture</option>
+              </select>
+            </div>
+            <div class="search-field search-price">
+              <label for="home-search-price">Max Price</label>
+              <input
+                id="home-search-price"
+                name="maxPrice"
+                type="range"
+                class="form-range"
+                min="10"
+                max="500"
+                value="120"
+                title="Max price per day"
+              />
+              <span class="price-val">$120 / day</span>
+            </div>
+            <button type="submit" class="btn-search-main">
+              <span class="search-count">Search Rentals</span>
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore All Items -->
+    <section id="featured" class="section-listings py-5">
+      <div class="container">
+        <div class="listings-header">
+          <div>
+            <span class="section-label">TRUSTED RENTAL SERVICE</span>
+            <h2>Explore All Items</h2>
+          </div>
+          <div class="status-tabs">
+            <a class="status-tab" href="items.html?status=all">All Status</a>
+            <a class="status-tab" href="items.html?status=new">New Items</a>
+            <a class="status-tab" href="items.html?status=used">Used Items</a>
+          </div>
+        </div>
+
+        <div class="row g-4 listings-grid">
+          <!-- Vehicle card 1 -->
+          <div class="col-md-6 col-lg-4 listing-col" data-status="new">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/Toyota RAV4.jpg" alt="Toyota RAV4" />
+                <span class="badge-featured">Featured</span>
+                <span class="badge-year">2023</span>
+                <span class="badge-photos"><i class="bi bi-camera"></i> 8</span>
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">SUV Â· 3 Similar</span>
+                <h3>Toyota RAV4 2023</h3>
+                <p class="card-price">$65 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-fuel-pump"></i> Petrol</span>
+                  <span><i class="bi bi-speedometer2"></i> 12k mi</span>
+                  <span><i class="bi bi-gear"></i> Auto</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=toyota-rav4-2023" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 listing-col" data-status="used">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/canon.png" alt="Canon DSLR" />
+                <span class="badge-featured">Featured</span>
+                <span class="badge-year">2022</span>
+                <span class="badge-photos"
+                  ><i class="bi bi-camera"></i> 12</span
+                >
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">Camera Â· 5 Similar</span>
+                <h3>Canon EOS DSLR Kit</h3>
+                <p class="card-price">$45 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-box"></i> Kit</span>
+                  <span><i class="bi bi-star-fill"></i> 4.9</span>
+                  <span><i class="bi bi-geo-alt"></i> Downtown</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=canon-eos-dslr-kit" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 listing-col" data-status="new">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/dewalt.png" alt="Power Drill" />
+                <span class="badge-year">2024</span>
+                <span class="badge-photos"><i class="bi bi-camera"></i> 4</span>
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">Tools Â· 2 Similar</span>
+                <h3>DeWalt Power Drill Set</h3>
+                <p class="card-price">$18 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-tools"></i> Cordless</span>
+                  <span><i class="bi bi-check-circle"></i> Like New</span>
+                  <span><i class="bi bi-geo-alt"></i> Westside</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=dewalt-power-drill-set" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 listing-col" data-status="used">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/pc.png" alt="Gaming Laptop" />
+                <span class="badge-featured">Featured</span>
+                <span class="badge-year">2023</span>
+                <span class="badge-photos"><i class="bi bi-camera"></i> 6</span>
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">Electronics Â· 4 Similar</span>
+                <h3>Gaming Laptop RTX 4070</h3>
+                <p class="card-price">$35 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-cpu"></i> RTX 4070</span>
+                  <span><i class="bi bi-memory"></i> 32GB</span>
+                  <span><i class="bi bi-geo-alt"></i> Midtown</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=gaming-laptop-rtx-4070" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 listing-col" data-status="new">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/projector.png" alt="Projector" />
+                <span class="badge-year">2024</span>
+                <span class="badge-photos"><i class="bi bi-camera"></i> 3</span>
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">Events Â· 1 Similar</span>
+                <h3>4K Home Theater Projector</h3>
+                <p class="card-price">$28 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-display"></i> 4K</span>
+                  <span><i class="bi bi-brightness-high"></i> 3000lm</span>
+                  <span><i class="bi bi-geo-alt"></i> North</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=4k-home-theater-projector" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-4 listing-col" data-status="used">
+            <article class="motorx-card">
+              <div class="motorx-card-img">
+                <img src="images/waterpp.png" alt="Pressure Washer" />
+                <span class="badge-featured">Featured</span>
+                <span class="badge-year">2021</span>
+                <span class="badge-photos"><i class="bi bi-camera"></i> 5</span>
+              </div>
+              <div class="motorx-card-body">
+                <span class="card-similar">Tools Â· 6 Similar</span>
+                <h3>Electric Pressure Washer</h3>
+                <p class="card-price">$22 <small>/ day</small></p>
+                <div class="card-specs">
+                  <span><i class="bi bi-droplet"></i> 2000 PSI</span>
+                  <span><i class="bi bi-plug"></i> Electric</span>
+                  <span><i class="bi bi-geo-alt"></i> East End</span>
+                </div>
+                <div class="card-footer">
+                  <a href="item-details.html?id=electric-pressure-washer" class="view-details"
+                    >VIEW DETAILS <i class="bi bi-arrow-up-right"></i
+                  ></a>
+                  <div class="card-actions">
+                    <button type="button" class="icon-btn" aria-label="Compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="Wishlist"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="motorx-footer">
+      <div class="container">
+        <div class="footer-flex">
+          <div>
+            <a
+              class="motorx-logo text-white mb-3 d-inline-block"
+              href="index.html"
+            >
+              <img src="images/logo.png" alt="CityRent Logo" />
+            </a>
+            <p class="small">
+              Citywide Item Rental System â€” trusted rentals across your city.
+            </p>
+          </div>
+          <div>
+            <h5>About</h5>
+            <a href="our-story.html">Our Story</a>
+            <a href="careers.html">Careers</a>
+          </div>
+          <div>
+            <h5>Contact</h5>
+            <a href="contact.html">Contact Us</a>
+            <a href="mailto:support@cityrent.com">support@cityrent.com</a>
+          </div>
+          <div>
+            <h5>Legal</h5>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+          <div>
+            <div class="top-bar-social">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="mb-0">&copy; 2026 CityRent. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <a href="#top" id="back-to-top" aria-label="Back to top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
+    <script src="services/itemService.js"></script>
+    <script src="components/rating-widget.js"></script>
+    <script src="js/shared-ui.js"></script>
+  </body>
+</html>
+
+

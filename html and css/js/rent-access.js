@@ -17,7 +17,7 @@
 
   function rentBlockedMessage(role) {
     if (role === "lessor") {
-      return "Lessors cannot rent items. Change your role to Both if you want to rent and list items.";
+      return "Lessor accounts cannot rent items. Please use a renter or both-role account.";
     }
     if (role === "admin" || role === "supervisor") return "Administrators cannot rent items.";
     if (role === "superadmin" || role === "super-admin") return "Super Administrators cannot rent items.";
@@ -25,6 +25,9 @@
   }
 
   function fallbackUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const itemId = params.get("itemId") || params.get("id");
+    if (itemId) return `item-details.html?id=${encodeURIComponent(itemId)}`;
     const pending = localStorage.getItem("pendingRental");
     if (pending) return `item-details.html?id=${encodeURIComponent(pending)}`;
     if (document.referrer && document.referrer.startsWith(window.location.origin)) return document.referrer;
@@ -37,7 +40,6 @@
     const role = normalizedRole(user);
 
     if (!user) {
-      sessionStorage.setItem("rentAccessMessage", "Please log in to rent this item.");
       localStorage.setItem("redirectAfterLogin", window.location.href);
       window.location.replace("login.html");
       return;
