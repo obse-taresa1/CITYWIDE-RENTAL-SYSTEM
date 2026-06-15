@@ -57,7 +57,7 @@
         "[data-item-meta]",
         `${item.rating} stars · ${item.reviews} reviews · ${item.location}`,
       );
-      setText("[data-item-price]", item.pricePerDay);
+      setText("[data-item-price]", window.CityRentPaymentService?.formatETB(item.pricePerDay) || `ETB ${Number(item.pricePerDay || 0).toLocaleString("en-ET")}`);
       setText("[data-item-description]", item.description);
       setText("[data-owner-name]", item.owner.name);
       setText(
@@ -66,7 +66,7 @@
       );
       setText(
         "[data-protection-details]",
-        `Security deposit of $${item.protection.deposit} held until return. ${item.protection.details}`,
+        `Security deposit of ${window.CityRentPaymentService?.formatETB(item.protection.deposit) || `ETB ${Number(item.protection.deposit || 0).toLocaleString("en-ET")}`} held until return. ${item.protection.details}`,
       );
 
       const ownerAvatar = document.querySelector("[data-owner-avatar]");

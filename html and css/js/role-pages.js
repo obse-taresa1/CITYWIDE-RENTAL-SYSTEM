@@ -1,18 +1,18 @@
 (function () {
   const samples = {
     listings: [
-      { id: "canon-eos-dslr-kit", title: "Canon EOS DSLR Kit", price: "$45/day", status: "Active", views: 318, image: "images/canon.png" },
-      { id: "toyota-rav4-2023", title: "Toyota RAV4 2023", price: "$65/day", status: "Active", views: 420, image: "images/Toyota RAV4.jpg" },
-      { id: "dewalt-power-drill-set", title: "DeWalt Power Drill Set", price: "$18/day", status: "Pending", views: 144, image: "images/dewalt.png" },
+      { id: "canon-eos-dslr-kit", title: "Canon EOS DSLR Kit", price: "ETB 6,000/day", status: "Active", views: 318, image: "images/canon.png" },
+      { id: "toyota-rav4-2023", title: "Toyota RAV4 2023", price: "ETB 8,500/day", status: "Active", views: 420, image: "images/Toyota RAV4.jpg" },
+      { id: "dewalt-power-drill-set", title: "DeWalt Power Drill Set", price: "ETB 2,300/day", status: "Pending", views: 144, image: "images/dewalt.png" },
     ],
     bookings: [
-      { id: "B-1001", itemId: "canon-eos-dslr-kit", title: "Canon EOS DSLR Kit", lessor: "Sarah M.", renter: "Alex Rivera", dates: "Jun 15 - Jun 17", status: "Active" },
-      { id: "B-1002", itemId: "toyota-rav4-2023", title: "Toyota RAV4 2023", lessor: "AutoRent Co.", renter: "Jamie Lee", dates: "Jun 22 - Jun 25", status: "Upcoming" },
-      { id: "B-0998", itemId: "dewalt-power-drill-set", title: "DeWalt Power Drill Set", lessor: "Mike T.", renter: "Alex Rivera", dates: "May 8 - May 10", status: "Completed" },
+      { id: "B-1001", itemId: "canon-eos-dslr-kit", title: "Canon EOS DSLR Kit", lessor: "Sarah M.", renter: "Alex Rivera", dates: "Jun 15 - Jun 17", status: "Active", paymentMethod: "Telebirr", totalDue: 45500 },
+      { id: "B-1002", itemId: "toyota-rav4-2023", title: "Toyota RAV4 2023", lessor: "AutoRent Co.", renter: "Jamie Lee", dates: "Jun 22 - Jun 25", status: "Upcoming", paymentMethod: "CBE Birr", totalDue: 81200 },
+      { id: "B-0998", itemId: "dewalt-power-drill-set", title: "DeWalt Power Drill Set", lessor: "Mike T.", renter: "Alex Rivera", dates: "May 8 - May 10", status: "Completed", paymentMethod: "E-birr", totalDue: 18200 },
     ],
     favorites: [
-      { id: "toyota-rav4-2023", title: "Toyota RAV4 2023", price: "$65/day", image: "images/Toyota RAV4.jpg" },
-      { id: "4k-home-theater-projector", title: "4K Home Theater Projector", price: "$28/day", image: "images/projector.png" },
+      { id: "toyota-rav4-2023", title: "Toyota RAV4 2023", price: "ETB 8,500/day", image: "images/Toyota RAV4.jpg" },
+      { id: "4k-home-theater-projector", title: "4K Home Theater Projector", price: "ETB 3,600/day", image: "images/projector.png" },
     ],
     messages: [
       { name: "Sarah M.", role: "Lessor", text: "The camera kit is available for your dates.", time: "2m", unread: 2 },
@@ -69,6 +69,21 @@
     return `<span class="badge-status ${cls}">${status}</span>`;
   }
 
+  function formatETB(amount) {
+    return window.CityRentPaymentService?.formatETB(amount) || `ETB ${Number(amount || 0).toLocaleString("en-ET")}`;
+  }
+
+  function paymentInfo(item) {
+    const method = item.paymentMethod || "Telebirr";
+    const total = item.totalDue ? ` - ${formatETB(item.totalDue)}` : "";
+    return `<p class="small mb-0"><strong>Payment Method:</strong> ${method}${total}</p>`;
+  }
+
+  function listingPrice(value) {
+    if (typeof value === "number") return `${formatETB(value)}/day`;
+    return value || `${formatETB(0)}/day`;
+  }
+
   function renderBookingPage() {
     const target = main();
     if (!target) return;
@@ -82,7 +97,7 @@
         <div class="card card-custom p-4">
           <div class="table-responsive"><table class="table table-hover mb-0">
             <thead><tr><th>Request</th><th>Renter</th><th>Dates</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody>${bookings.map((item) => `<tr><td>${item.title}</td><td>${item.renter || "Renter"}</td><td>${item.dates}</td><td>${badge(item.status)}</td><td><button class="btn btn-sm btn-success me-1">Approve</button><button class="btn btn-sm btn-outline-danger">Reject</button></td></tr>`).join("")}</tbody>
+            <tbody>${bookings.map((item) => `<tr><td>${item.title}${paymentInfo(item)}</td><td>${item.renter || "Renter"}</td><td>${item.dates || `${item.startDate || "Not set"} - ${item.endDate || "Not set"}`}</td><td>${badge(item.status)}</td><td><button class="btn btn-sm btn-success me-1">Approve</button><button class="btn btn-sm btn-outline-danger">Reject</button></td></tr>`).join("")}</tbody>
           </table></div>
         </div>`;
       return;
@@ -90,7 +105,7 @@
 
     const list = isHistory ? bookings.filter((item) => item.status === "Completed") : bookings.filter((item) => item.status !== "Completed");
     target.innerHTML = `<h1 class="h3 mb-4">${isHistory ? "Booking History" : "My Bookings"}</h1>
-      ${list.length ? `<div class="row g-4">${list.map((item) => `<div class="col-md-6"><div class="card card-custom p-4 h-100"><div class="d-flex justify-content-between gap-3"><div><h5>${item.title}</h5><p class="text-muted mb-1">${item.dates}</p><p class="small mb-0">Lessor: ${item.lessor}</p></div>${badge(item.status)}</div><div class="mt-3 d-flex gap-2 flex-wrap"><a class="btn btn-sm btn-outline-custom" href="item-details.html?id=${item.itemId}">Details</a>${isHistory ? `<a class="btn btn-sm btn-primary-custom" href="item-details.html?id=${item.itemId}">Review</a>` : `<button class="btn btn-sm btn-outline-danger">Cancel Booking</button>`}</div></div></div>`).join("")}</div>` : emptyState("No bookings yet", "Start with Browse Listings and book your first rental.", "items.html", "Browse Listings")}`;
+      ${list.length ? `<div class="row g-4">${list.map((item) => `<div class="col-md-6"><div class="card card-custom p-4 h-100"><div class="d-flex justify-content-between gap-3"><div><h5>${item.title}</h5><p class="text-muted mb-1">${item.dates || `${item.startDate || "Not set"} - ${item.endDate || "Not set"}`}</p><p class="small mb-0">Lessor: ${item.lessor || "CityRent owner"}</p>${paymentInfo(item)}</div>${badge(item.status)}</div><div class="mt-3 d-flex gap-2 flex-wrap"><a class="btn btn-sm btn-outline-custom" href="item-details.html?id=${item.itemId}">Details</a>${isHistory ? `<a class="btn btn-sm btn-primary-custom" href="item-details.html?id=${item.itemId}">Review</a>` : `<button class="btn btn-sm btn-outline-danger">Cancel Booking</button>`}</div></div></div>`).join("")}</div>` : emptyState("No bookings yet", "Start with Browse Listings and book your first rental.", "items.html", "Browse Listings")}`;
   }
 
   function renderListingDashboard() {
@@ -118,9 +133,9 @@
       <div class="dashboard-cards mb-4">
         <div class="card card-custom stat-card"><div class="stat-icon blue"><i class="bi bi-box-seam"></i></div><div><p class="text-muted mb-0 small">Total Listings</p><h3>${listings.length}</h3></div></div>
         <div class="card card-custom stat-card"><div class="stat-icon green"><i class="bi bi-eye"></i></div><div><p class="text-muted mb-0 small">Listing Views</p><h3>${listings.reduce((sum, item) => sum + Number(item.views || 0), 0)}</h3></div></div>
-        <div class="card card-custom stat-card"><div class="stat-icon orange"><i class="bi bi-cash-coin"></i></div><div><p class="text-muted mb-0 small">Monthly Earnings</p><h3>$840</h3></div></div>
+        <div class="card card-custom stat-card"><div class="stat-icon orange"><i class="bi bi-cash-coin"></i></div><div><p class="text-muted mb-0 small">Monthly Earnings</p><h3>ETB 109,200</h3></div></div>
       </div>
-      ${listings.length ? `<div class="row g-4">${listings.map((item) => `<div class="col-md-6 col-xl-4"><article class="card card-custom dashboard-listing-card h-100"><img src="${item.image}" alt="${item.title}"><div class="p-3"><div class="d-flex justify-content-between align-items-start gap-2"><h5>${item.title}</h5>${badge(item.status)}</div><p class="text-primary-custom fw-bold">${item.price}</p><div class="d-flex gap-2"><a href="item-details.html?id=${item.id}" class="btn btn-sm btn-outline-custom">View</a><button class="btn btn-sm btn-primary-custom">Edit</button><button class="btn btn-sm btn-outline-danger">Delete</button></div></div></article></div>`).join("")}</div>` : emptyState("No listings yet", "Create your first listing and start receiving rental requests.", "list-item.html", "Create First Listing")}`;
+      ${listings.length ? `<div class="row g-4">${listings.map((item) => `<div class="col-md-6 col-xl-4"><article class="card card-custom dashboard-listing-card h-100"><img src="${item.image}" alt="${item.title}"><div class="p-3"><div class="d-flex justify-content-between align-items-start gap-2"><h5>${item.title}</h5>${badge(item.status)}</div><p class="text-primary-custom fw-bold">${listingPrice(item.price)}</p><div class="d-flex gap-2"><a href="item-details.html?id=${item.id}" class="btn btn-sm btn-outline-custom">View</a><button class="btn btn-sm btn-primary-custom">Edit</button><button class="btn btn-sm btn-outline-danger">Delete</button></div></div></article></div>`).join("")}</div>` : emptyState("No listings yet", "Create your first listing and start receiving rental requests.", "list-item.html", "Create First Listing")}`;
   }
 
   function renderFavorites() {
@@ -128,7 +143,7 @@
     const container = document.querySelector(".section-listings .container");
     if (!container || document.querySelector("[data-favorites-panel]")) return;
     const favorites = read("favorites", samples.favorites);
-    container.insertAdjacentHTML("afterbegin", `<div class="card card-custom p-4 mb-4" data-favorites-panel><div class="d-flex justify-content-between align-items-center mb-3"><div><span class="section-label">SAVED ITEMS</span><h2 class="h4 mb-0">Wishlist/Favorites</h2></div><a href="items.html" class="btn btn-outline-custom btn-sm">Browse Listings</a></div>${favorites.length ? `<div class="row g-3">${favorites.map((item) => `<div class="col-md-6"><div class="favorite-row"><img src="${item.image}" alt="${item.title}"><div><strong>${item.title}</strong><p class="text-muted mb-0">${item.price}</p></div><div class="ms-auto d-flex gap-2"><a href="item-details.html?id=${item.id}" class="btn btn-sm btn-primary-custom">Book</a><button class="btn btn-sm btn-outline-danger">Remove</button></div></div></div>`).join("")}</div>` : emptyState("No saved items", "Save listings you want to rent later.", "items.html", "Browse Listings")}</div>`);
+    container.insertAdjacentHTML("afterbegin", `<div class="card card-custom p-4 mb-4" data-favorites-panel><div class="d-flex justify-content-between align-items-center mb-3"><div><span class="section-label">SAVED ITEMS</span><h2 class="h4 mb-0">Wishlist/Favorites</h2></div><a href="items.html" class="btn btn-outline-custom btn-sm">Browse Listings</a></div>${favorites.length ? `<div class="row g-3">${favorites.map((item) => `<div class="col-md-6"><div class="favorite-row"><img src="${item.image}" alt="${item.title}"><div><strong>${item.title}</strong><p class="text-muted mb-0">${listingPrice(item.price)}</p></div><div class="ms-auto d-flex gap-2"><a href="item-details.html?id=${item.id}" class="btn btn-sm btn-primary-custom">Book</a><button class="btn btn-sm btn-outline-danger">Remove</button></div></div></div>`).join("")}</div>` : emptyState("No saved items", "Save listings you want to rent later.", "items.html", "Browse Listings")}</div>`);
   }
 
   function renderMessages() {
@@ -149,15 +164,15 @@
     if (window.location.hash === "#earnings") {
       target.innerHTML = `<h1 class="h3 mb-4">Earnings</h1>
         <div class="dashboard-cards mb-4">
-          <div class="card card-custom stat-card"><div class="stat-icon blue"><i class="bi bi-cash-coin"></i></div><div><p class="text-muted mb-0 small">Revenue Summary</p><h3>$2,840</h3></div></div>
-          <div class="card card-custom stat-card"><div class="stat-icon green"><i class="bi bi-graph-up"></i></div><div><p class="text-muted mb-0 small">Monthly Earnings</p><h3>$840</h3></div></div>
+          <div class="card card-custom stat-card"><div class="stat-icon blue"><i class="bi bi-cash-coin"></i></div><div><p class="text-muted mb-0 small">Revenue Summary</p><h3>ETB 369,200</h3></div></div>
+          <div class="card card-custom stat-card"><div class="stat-icon green"><i class="bi bi-graph-up"></i></div><div><p class="text-muted mb-0 small">Monthly Earnings</p><h3>ETB 109,200</h3></div></div>
           <div class="card card-custom stat-card"><div class="stat-icon orange"><i class="bi bi-calendar-check"></i></div><div><p class="text-muted mb-0 small">Booking Income</p><h3>24</h3></div></div>
         </div>
         <div class="card card-custom p-4">
           <h5 class="mb-3">Booking Income Statistics</h5>
           <div class="table-responsive"><table class="table table-hover mb-0">
             <thead><tr><th>Month</th><th>Bookings</th><th>Income</th><th>Status</th></tr></thead>
-            <tbody><tr><td>June</td><td>8</td><td>$840</td><td>${badge("Active")}</td></tr><tr><td>May</td><td>11</td><td>$1,220</td><td>${badge("Completed")}</td></tr><tr><td>April</td><td>5</td><td>$780</td><td>${badge("Completed")}</td></tr></tbody>
+            <tbody><tr><td>June</td><td>8</td><td>ETB 109,200</td><td>${badge("Active")}</td></tr><tr><td>May</td><td>11</td><td>ETB 158,600</td><td>${badge("Completed")}</td></tr><tr><td>April</td><td>5</td><td>ETB 101,400</td><td>${badge("Completed")}</td></tr></tbody>
           </table></div>
         </div>`;
       return;

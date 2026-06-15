@@ -34,9 +34,9 @@
     ["EventPro LLC", "contact@eventpro.com", "both", "Pending"],
   ];
   const sampleListings = [
-    ["Canon EOS DSLR Kit", "Cameras", "$45/day", "Pending"],
-    ["Toyota RAV4 2023", "Vehicles", "$65/day", "Active"],
-    ["DeWalt Power Drill Set", "Tools", "$18/day", "Active"],
+    ["Canon EOS DSLR Kit", "Cameras", "ETB 6,000/day", "Pending"],
+    ["Toyota RAV4 2023", "Vehicles", "ETB 8,500/day", "Active"],
+    ["DeWalt Power Drill Set", "Tools", "ETB 2,300/day", "Active"],
   ];
   const sampleMessages = [
     ["Maya Patel", "maya@email.com", "Account onboarding", "Unread"],
@@ -130,6 +130,10 @@
     const normalized = (status || "").toLowerCase();
     const cls = normalized === "approved" || normalized === "read" || normalized === "active" ? "badge-active" : normalized === "rejected" ? "badge-dispute" : "badge-pending";
     return `<span class="badge-status ${cls}">${status}</span>`;
+  }
+
+  function formatETB(amount) {
+    return window.CityRentPaymentService?.formatETB(amount) || `ETB ${Number(amount || 0).toLocaleString("en-ET")}`;
   }
 
   function adminRows() {
@@ -366,7 +370,7 @@
       ? data.map((item) => [
           item.title || "Untitled",
           item.category || "General",
-          `$${Number(item.price || 0).toFixed(0)}/day`,
+          `${formatETB(item.price || 0)}/day`,
           statusBadge(item.status || "pending"),
           item.ownerName || "Owner",
           item.id,

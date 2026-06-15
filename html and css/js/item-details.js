@@ -1,92 +1,92 @@
 const items = {
   "canon-eos-dslr-kit": {
     title: "Canon EOS DSLR Kit",
-    price: "$45",
+    price: "ETB 6,000",
     rating: "4.9 stars · 124 reviews · Downtown",
     description:
       "Professional Canon EOS kit with 24-70mm lens, spare battery, memory cards, and carrying case. Perfect for events, portraits, and travel photography.",
     images: ["images/canon.png", "images/catagcanon.png", "images/catagkit.png"],
     protection:
-      "Security deposit of $200 held until return. Damage protection available at checkout.",
+      "Security deposit of ETB 26,000 held until return. Damage protection available at checkout.",
   },
   "toyota-rav4-2023": {
     title: "Toyota RAV4 2023",
-    price: "$65",
+    price: "ETB 8,500",
     rating: "4.8 stars · 86 reviews · Downtown",
     description:
       "Comfortable Toyota RAV4 SUV with automatic transmission, excellent fuel economy, and flexible pickup. Ideal for errands, weekend trips, and city travel.",
     images: ["images/Toyota RAV4.jpg", "images/Toyota RAV4.jpg"],
     protection:
-      "Security deposit of $350 held until return. Basic vehicle protection is available at checkout.",
+      "Security deposit of ETB 45,500 held until return. Basic vehicle protection is available at checkout.",
   },
   "dewalt-power-drill-set": {
     title: "DeWalt Power Drill Set",
-    price: "$18",
+    price: "ETB 2,300",
     rating: "4.7 stars · 52 reviews · Westside",
     description:
       "Cordless drill set with batteries, charger, drill bits, and carrying case. Great for home repairs, furniture assembly, and renovation work.",
     images: ["images/dewalt.png", "images/dewalt.png"],
     protection:
-      "Security deposit of $80 held until return. Deposit covers missing parts and accidental tool damage.",
+      "Security deposit of ETB 10,400 held until return. Deposit covers missing parts and accidental tool damage.",
   },
   "gaming-laptop-rtx-4070": {
     title: "Gaming Laptop RTX 4070",
-    price: "$35",
+    price: "ETB 4,500",
     rating: "4.8 stars · 73 reviews · Midtown",
     description:
       "High-performance gaming and creator laptop with RTX 4070 graphics, 32GB RAM, and fast storage. Suitable for events, editing, and gaming sessions.",
     images: ["images/pc.png", "images/pc.png"],
     protection:
-      "Security deposit of $300 held until return. Device condition is verified at pickup and return.",
+      "Security deposit of ETB 39,000 held until return. Device condition is verified at pickup and return.",
   },
   "4k-home-theater-projector": {
     title: "4K Home Theater Projector",
-    price: "$28",
+    price: "ETB 3,600",
     rating: "4.6 stars · 41 reviews · Central",
     description:
       "Bright 4K projector for movie nights, business presentations, and events. Includes HDMI cable, remote, and travel case.",
     images: ["images/projector.png", "images/projector.png"],
     protection:
-      "Security deposit of $150 held until return. Deposit covers lens, remote, or cable damage.",
+      "Security deposit of ETB 19,500 held until return. Deposit covers lens, remote, or cable damage.",
   },
   "electric-pressure-washer": {
     title: "Electric Pressure Washer",
-    price: "$22",
+    price: "ETB 2,800",
     rating: "4.5 stars · 34 reviews · Northside",
     description:
       "Compact electric pressure washer for patios, cars, driveways, and outdoor furniture. Includes hose and nozzles.",
     images: ["images/waterpp.png", "images/waterpp.png"],
     protection:
-      "Security deposit of $100 held until return. Deposit covers accessories and cleaning equipment condition.",
+      "Security deposit of ETB 13,000 held until return. Deposit covers accessories and cleaning equipment condition.",
   },
 };
 
 const generatedItems = {
-  "gopro-hero-12": ["GoPro Hero 12", "$25", "images/catag360.png"],
-  "sony-mirrorless-kit": ["Sony Mirrorless Kit", "$60", "images/catagsony.png"],
-  "50mm-prime-lens": ["50mm Prime Lens", "$15", "images/catagsony4k.png"],
-  "portable-lighting-kit": ["Portable Lighting Kit", "$18", "images/catagkit.png"],
-  "360-action-camera": ["360 Action Camera", "$30", "images/catag360.png"],
-  "55-smart-tv-4k": ['55" Smart TV 4K', "$40", "images/electrotv.png"],
-  "portable-bluetooth-speaker": ["Portable Bluetooth Speaker", "$8", "images/electrospkear.png"],
-  "noise-cancelling-headphones": ["Noise-Cancelling Headphones", "$12", "images/electroheadset.png"],
-  "modern-sectional-sofa": ["Modern Sectional Sofa", "$55", "images/furnsofa.png"],
-  "standing-desk-adjustable": ["Standing Desk Adjustable", "$12", "images/furndesk.png"],
-  "solid-wood-dining-table": ["Solid Wood Dining Table", "$40", "images/furndinning.png"],
-  "leather-armchair": ["Leather Armchair", "$18", "images/furnchair.png"],
-  "open-bookshelf": ["Open Bookshelf", "$10", "images/furnshelf.png"],
-  "mountain-bike-pro": ["Mountain Bike Pro", "$15", "images/sportbick.png"],
-  "golf-set": ["Golf set", "$20", "images/sportgolf.png"],
-  "single-kayak": ["Single Kayak", "$22", "images/sportkeay.png"],
-  "stand-up-paddleboard": ["Stand-Up Paddleboard", "$18", "images/sportpandel.png"],
-  "climbing-gear-set": ["Climbing Gear Set", "$25", "images/sportclim.png"],
-  "electric-lawn-mower": ["Electric Lawn Mower", "$30", "images/toollaw.png"],
-  "circular-saw-pro": ["Circular Saw Pro", "$20", "images/toolsaw.png"],
-  "orbital-sander": ["Orbital Sander", "$10", "images/toolorbit.png"],
-  "honda-civic-2022": ["Honda Civic 2022", "$45", "images/vehhonda.png"],
-  "ford-transit-van": ["Ford Transit Van", "$80", "images/vehford.png"],
-  "mini-cooper-2020": ["Mini Cooper 2020", "$50", "images/vehcooper.png"],
-  "7-seater-suv": ["7-Seater SUV", "$90", "images/vehsvu.png"],
+  "gopro-hero-12": ["GoPro Hero 12", "ETB 3,200", "images/catag360.png"],
+  "sony-mirrorless-kit": ["Sony Mirrorless Kit", "ETB 7,800", "images/catagsony.png"],
+  "50mm-prime-lens": ["50mm Prime Lens", "ETB 2,000", "images/catagsony4k.png"],
+  "portable-lighting-kit": ["Portable Lighting Kit", "ETB 2,300", "images/catagkit.png"],
+  "360-action-camera": ["360 Action Camera", "ETB 3,900", "images/catag360.png"],
+  "55-smart-tv-4k": ['55" Smart TV 4K', "ETB 5,200", "images/electrotv.png"],
+  "portable-bluetooth-speaker": ["Portable Bluetooth Speaker", "ETB 1,000", "images/electrospkear.png"],
+  "noise-cancelling-headphones": ["Noise-Cancelling Headphones", "ETB 1,500", "images/electroheadset.png"],
+  "modern-sectional-sofa": ["Modern Sectional Sofa", "ETB 7,200", "images/furnsofa.png"],
+  "standing-desk-adjustable": ["Standing Desk Adjustable", "ETB 1,500", "images/furndesk.png"],
+  "solid-wood-dining-table": ["Solid Wood Dining Table", "ETB 5,200", "images/furndinning.png"],
+  "leather-armchair": ["Leather Armchair", "ETB 2,300", "images/furnchair.png"],
+  "open-bookshelf": ["Open Bookshelf", "ETB 1,300", "images/furnshelf.png"],
+  "mountain-bike-pro": ["Mountain Bike Pro", "ETB 2,000", "images/sportbick.png"],
+  "golf-set": ["Golf set", "ETB 2,600", "images/sportgolf.png"],
+  "single-kayak": ["Single Kayak", "ETB 2,800", "images/sportkeay.png"],
+  "stand-up-paddleboard": ["Stand-Up Paddleboard", "ETB 2,300", "images/sportpandel.png"],
+  "climbing-gear-set": ["Climbing Gear Set", "ETB 3,200", "images/sportclim.png"],
+  "electric-lawn-mower": ["Electric Lawn Mower", "ETB 3,900", "images/toollaw.png"],
+  "circular-saw-pro": ["Circular Saw Pro", "ETB 2,600", "images/toolsaw.png"],
+  "orbital-sander": ["Orbital Sander", "ETB 1,300", "images/toolorbit.png"],
+  "honda-civic-2022": ["Honda Civic 2022", "ETB 6,000", "images/vehhonda.png"],
+  "ford-transit-van": ["Ford Transit Van", "ETB 10,400", "images/vehford.png"],
+  "mini-cooper-2020": ["Mini Cooper 2020", "ETB 6,500", "images/vehcooper.png"],
+  "7-seater-suv": ["7-Seater SUV", "ETB 11,700", "images/vehsvu.png"],
 };
 
 Object.entries(generatedItems).forEach(([id, [title, price, image]]) => {

@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const LANGUAGE_KEY = "language";
   const API_KEY = "AIzaSyBJbIlFDnvTlGABr2cLiorz22voB6UYJRo";
   const GEMINI_MODEL = "gemini-3.5-flash";
@@ -944,7 +944,7 @@ Rules:
 
     function updatePriceLabel() {
       if (priceInput && priceValue) {
-        priceValue.textContent = `$${priceInput.value} / day`;
+        priceValue.textContent = `ETB ${Number(priceInput.value || 0).toLocaleString("en-ET")} / day`;
       }
     }
 
@@ -1035,7 +1035,7 @@ Rules:
 
   function categoryFromCard(card) {
     const similar = card?.querySelector(".card-similar")?.textContent || "";
-    const category = similar.split("·")[0].trim().toLowerCase();
+    const category = similar.split("�")[0].trim().toLowerCase();
     if (!category) return "";
     if (category.includes("camera")) return "cameras";
     if (category.includes("tool")) return "tools";
@@ -1048,7 +1048,7 @@ Rules:
 
   function extractPrice(card) {
     const priceText = card?.querySelector(".card-price")?.textContent || "";
-    const match = priceText.match(/\$?\s*(\d+(?:\.\d+)?)/);
+    const match = priceText.replace(/,/g, "").match(/(?:ETB|Br)?\s*(\d+(?:\.\d+)?)/i);
     return match ? Number(match[1]) : 0;
   }
 
@@ -1073,7 +1073,7 @@ Rules:
       selectedCategory === "all" ? "all categories" : selectedCategory.replace("-", " ");
     const filters = [
       selectedStatus !== "all" ? `${selectedStatus} items` : "",
-      maxPrice ? `up to $${maxPrice}/day` : "",
+      maxPrice ? `${window.CityRentPaymentService?.formatETB(Number(maxPrice)) || `ETB ${Number(maxPrice).toLocaleString("en-ET")}`}/day` : "",
     ].filter(Boolean);
     const detail = filters.length ? ` matching ${filters.join(", ")}` : "";
     const summaryText = `${visibleCount} item${visibleCount === 1 ? "" : "s"} found in ${categoryLabel}${detail}.`;
